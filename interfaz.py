@@ -1,11 +1,12 @@
 # LIBRARY
+from collections import deque
 import pygame
-from pygame import event as EventoInterfaz
 
 # CONSTANTS
 BLACK = (0, 0, 0)
 CIAN = (0, 255, 255)
 BLANCO = (255, 255, 255)
+RED = (255, 0, 0)
 
 
 class Interfaz():
@@ -23,8 +24,10 @@ class Interfaz():
         self.h_ref = [0, 0]
         self.razones = [0, 0]
         self.voltajes = [0, 0]
+        self.mouse_pos = [0, 0]
         self.modo = "A"
         self.alerta = False
+        self.graficos = GraficosInterfaz(self)
 
     def dibujar_estanque(self, x, y, delta1, delta2):
         pygame.draw.line(self.screen, BLACK, (x, y), (x + delta1, y), 4)
@@ -90,10 +93,14 @@ class Interfaz():
         (voltaje1, voltaje2) = self.voltajes
         font = self.font13
         c = BLACK
-        self.screen.blit(font.render('Razón de Flujo 1: '+str(round(razon1, 2)), True, c), (55, 205))
-        self.screen.blit(font.render('Voltaje Válvula 1: '+str(round(voltaje1, 2)), True, c), (55, 225))
-        self.screen.blit(font.render('Razón de Flujo 2: '+str(round(razon2, 2)), True, c), (455, 205))
-        self.screen.blit(font.render('Voltaje Válvula 2: '+str(round(voltaje2, 2)), True, c), (455, 225))
+        self.screen.blit(font.render('Razón de Flujo 1: '+str(round(razon1, 2)), True, c),
+                         (55, 205))
+        self.screen.blit(font.render('Voltaje Válvula 1: '+str(round(voltaje1, 2)), True, c),
+                         (55, 225))
+        self.screen.blit(font.render('Razón de Flujo 2: '+str(round(razon2, 2)), True, c),
+                         (455, 205))
+        self.screen.blit(font.render('Voltaje Válvula 2: '+str(round(voltaje2, 2)), True, c),
+                         (455, 225))
 
     def dibujar_modo(self):
         c = BLACK
@@ -112,7 +119,7 @@ class Interfaz():
         delta1 = 100
         delta2 = 150
         screen = self.screen
-        c = BLACK
+        c = CIAN
         delta3 = 3
         (h1, h2, h3, h4) = self.alturas
         # Tanque 1:
@@ -132,7 +139,8 @@ class Interfaz():
         pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(340 + delta3, 30 + delta3, 96,
                          int(146 - h4 * (146/50))))
 
-    def actualizar(self):
+    def actualizar(self, info_evento):
+        self.alerta = info_evento[0]
         self.screen.fill(BLANCO)
         self.dibujar_todo()
         self.dibujar_h_t()
@@ -140,9 +148,11 @@ class Interfaz():
         self.dibujar_modo()
         if self.alerta:
             self.dibujar_alerta()
+            print()
         self.dibujar_agua()
         if self.modo == "A":
             self.h_referencias()
+        self.graficos.actualizar()
         pygame.display.flip()
 
     def setear_variables(self, alturas, temp, razones, valvulas):
@@ -150,17 +160,45 @@ class Interfaz():
         self.temp = temp
         self.razones = razones
         self.voltajes = valvulas
+        self.graficos.actualizar_muestras(alturas)
 
 
 class GraficosInterfaz():
-    def __init__(self):
-        pass
+    def __init__(self, interfaz: Interfaz):
+        self.screen = interfaz.screen
+        self.res_x = 200
+        self.res_y = 200
+        # [Tanq1, Tanq2, Tanq3, Tanq4]
+        self.origenes = [(700, 550), (1020, 550), (700, 250), (1020, 250)]
+        self.len_muestras = 19
+        self.muestras = [deque([0 for i in range(self.len_muestras)]) for y in range(4)]
+
+    def dibujar_cartesianas(self):
+        for origen in self.origenes:
+            origen_arriba = (origen[0], origen[1]-self.res_y)
+            origen_derecha = (origen[0]+self.res_x, origen[1])
+            pygame.draw.line(self.screen, BLACK, origen, origen_arriba, 4)
+            pygame.draw.line(self.screen, BLACK, origen, origen_derecha, 4)
+
+    def dibujar_muestras(self):
+        for y in range(len(self.origenes)):
+            origen = self.origenes[y]
+            muestras = self.muestras[y]
+            for x in range(len(muestras)):
+                altura = muestras[x]
+                pygame.draw.circle(self.screen, RED,
+                                   (origen[0] + 10*x+10, origen[1] - (18*altura/5 + 20)), 4)
+
+    def actualizar_muestras(self, alturas):
+        for i in range(len(self.muestras)):
+            lista = self.muestras[i]
+            lista.rotate(-1)
+            lista[-1] = alturas[i]
+
+    def actualizar(self):
+        self.dibujar_cartesianas()
+        self.dibujar_muestras()
 
 
 if __name__ == '__main__':
-    interfaz = Interfaz()
-    while True:
-        EventoInterfaz.get()
-        interfaz.actualizar()
-
-    pygame.quit()
+    pass
