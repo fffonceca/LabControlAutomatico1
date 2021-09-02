@@ -5,9 +5,10 @@ import matplotlib.pyplot as plt
 import pygame
 import time
 import sys
-from cliente import Cliente # cliente OPCUA
+from Libreria.cliente import Cliente # cliente OPCUA
 import random
 import threading
+
 
 class QuadrupleTank():
     def __init__(self, x0, Hmax, voltmax):

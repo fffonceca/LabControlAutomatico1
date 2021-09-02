@@ -4,7 +4,7 @@ import threading
 from opcua.server.history_sql import HistorySQLite
 import os
 import random
-from TanquesNamespace import TanquesNamespace
+from Libreria.TanquesNamespace import TanquesNamespace
 #from Espesador.EspesadorNamesPace import EspesadorNamespace
 
 '''
