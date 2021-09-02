@@ -1,4 +1,3 @@
 @echo off
-START py ./ServidorOPC.py
-START py ./QuadrupleTank.py
-START py ./experiencia.py
+START py ./Libreria/ServidorOPC.py
+START py ./Libreria/QuadrupleTank.py
