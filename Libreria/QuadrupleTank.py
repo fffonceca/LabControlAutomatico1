@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pygame
 import time
 import sys
-from Libreria.cliente import Cliente # cliente OPCUA
+from cliente import Cliente  # cliente OPCUA
 import random
 import threading
 
