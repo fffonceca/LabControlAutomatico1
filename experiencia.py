@@ -1,7 +1,8 @@
 # LIBRERIAS:
-from cliente import Cliente
-import pygame       # Load pygame for IO-interfacing
+from Libreria.cliente import Cliente
 from pygame.locals import *
+from util import obtener
+import pygame
 import threading
 
 # VARIABLES GLOBALES:
@@ -323,7 +324,7 @@ if __name__ == '__main__':
     Inicio()
 
     while True:
-        # Obtener()
+        # obtener()
         Eventos()
         # Control()
         Interfaz(state, vc, temp, h_ref, pid, vm, programa_evento)
