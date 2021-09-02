@@ -318,13 +318,13 @@ def Control():
 
 
 if __name__ == '__main__':
-    # cliente = Cliente("opc.tcp://localhost:4840/freeopcua/server/", suscribir_eventos=True,
-    #                   SubHandler=SubHandler)
-    # cliente.conectar()
+    cliente = Cliente("opc.tcp://localhost:4840/freeopcua/server/", suscribir_eventos=True,
+                      SubHandler=SubHandler)
+    cliente.conectar()
     Inicio()
 
     while True:
-        # obtener()
+        Obtener()
         Eventos()
-        # Control()
+        Control()
         Interfaz(state, vc, temp, h_ref, pid, vm, programa_evento)
