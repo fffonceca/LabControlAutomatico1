@@ -41,12 +41,13 @@ class Interfaz():
     def dibujar_todo(self):
         delta1 = 100
         delta2 = 150
+
         # Cuadros verdes claros
         pygame.draw.rect(self.screen, (201, 215, 154), pygame.Rect(50, 200, 150, 45))
         pygame.draw.rect(self.screen, (201, 215, 154), pygame.Rect(450, 200, 150, 45))
 
         # Cuadro rojo claro
-        pygame.draw.rect(self.screen, (251, 215, 194), pygame.Rect(250, 425, 140, 45))
+        pygame.draw.rect(self.screen, (251, 215, 194), pygame.Rect(250, 430, 140, 35))#425, 45
 
         # Cuadros morados claros
         pygame.draw.rect(self.screen, (201, 154, 215), pygame.Rect(200 - 150, 30, 140, 45))
@@ -69,7 +70,7 @@ class Interfaz():
                          True, (2, 25, 153)), (225, 310))
         self.screen.blit(self.font13.render('ref: ' + str(round(self.h_ref[1], 2)), True,
                          (2, 25, 153)), (365, 310))
-        pygame.draw.line(self.screen, (2, 25, 153),
+        pygame.draw.line(self.screen, (0, 0, 0),
                          (200, self.h_ref[0]*(-146/50)+399),
                          (300, self.h_ref[0]*(-146/50)+399), 2)
         pygame.draw.line(self.screen, (0, 0, 0),
@@ -81,20 +82,20 @@ class Interfaz():
         (t1, t2, t3, t4) = self.temp
         delta1 = 100
         c = BLACK
-        self.screen.blit(self.font13.render('Altura 1: '+str(round(h1, 2)), True, c), (55, 360))
-        self.screen.blit(self.font13.render('Temperatura 1: '+str(round(t1, 2)), True, c),
+        self.screen.blit(self.font13.render('Altura 1: '+str(round(h1, 2))+ ' cm', True, c), (55, 360))
+        self.screen.blit(self.font13.render('Temperatura 1: '+str(round(t1, 2)) + '°C', True, c),
                          (55, 250 + 5 + 20 + 105))
-        self.screen.blit(self.font13.render('Altura 2: ' + str(round(h2, 2)), True, c),
+        self.screen.blit(self.font13.render('Altura 2: ' + str(round(h2, 2))+ ' cm', True, c),
                          (340 + delta1 + 10 + 5, 250 + 5 + 105))
-        self.screen.blit(self.font13.render('Temperatura 2: ' + str(round(t2, 2)), True, c),
+        self.screen.blit(self.font13.render('Temperatura 2: ' + str(round(t2, 2)) + '°C', True, c),
                          (340 + delta1 + 10 + 5, 250 + 5 + 20 + 105))
-        self.screen.blit(self.font13.render('Altura 3: ' + str(round(h3, 2)), True, c),
+        self.screen.blit(self.font13.render('Altura 3: ' + str(round(h3, 2))+ ' cm', True, c),
                          (200 - 150 + 5, 30 + 5))
-        self.screen.blit(self.font13.render('Temperatura 3: ' + str(round(t3, 2)), True, c),
+        self.screen.blit(self.font13.render('Temperatura 3: ' + str(round(t3, 2)) + '°C', True, c),
                          (200 - 150 + 5, 30 + 5 + 20))
-        self.screen.blit(self.font13.render('Altura 4: ' + str(round(h4, 2)), True, c),
+        self.screen.blit(self.font13.render('Altura 4: ' + str(round(h4, 2))+ ' cm', True, c),
                          (340 + delta1 + 10 + 5, 30 + 5))
-        self.screen.blit(self.font13.render('Temperatura 4: ' + str(round(t4, 2)), True, c),
+        self.screen.blit(self.font13.render('Temperatura 4: ' + str(round(t4, 2)) + '°C', True, c),
                          (340 + delta1 + 10 + 5, 30 + 5 + 20))
 
     def dibujar_r_v(self):
@@ -104,20 +105,20 @@ class Interfaz():
         c = BLACK
         self.screen.blit(font.render('Razón de Flujo 1: '+str(round(razon1, 2)), True, c),
                          (55, 205))
-        self.screen.blit(font.render('Voltaje Válvula 1: '+str(round(voltaje1, 2)), True, c),
+        self.screen.blit(font.render('Voltaje Válvula 1: '+str(round(voltaje1, 2))+ ' V', True, c),
                          (55, 225))
         self.screen.blit(font.render('Razón de Flujo 2: '+str(round(razon2, 2)), True, c),
                          (455, 205))
-        self.screen.blit(font.render('Voltaje Válvula 2: '+str(round(voltaje2, 2)), True, c),
+        self.screen.blit(font.render('Voltaje Válvula 2: '+str(round(voltaje2, 2))+ ' V', True, c),
                          (455, 225))
 
     def dibujar_modo(self):
         c = BLACK
         font = self.font13
         if(self.modo == 'A'):
-            self.screen.blit(font.render('Modo: ' + 'Automático', True, c), (255, 430))
+            self.screen.blit(font.render('  Modo: ' + 'Automático', True, c), (255, 438))
         elif(self.modo == 'M'):
-            self.screen.blit(font.render('Modo: ' + 'Manual', True, c), (255, 430))
+            self.screen.blit(font.render('  Modo: ' + 'Manual', True, c), (255, 438))
 
     def dibujar_alerta(self):
         if(self.alerta == 1):
@@ -179,7 +180,7 @@ class GraficosInterfaz():
         self.res_y = 200
         # [Tanq1, Tanq2, Voltajes]
         self.origenes = [(700, 470), (1020, 470), (860, 220)]
-        self.label = ["Altura Tanque 1", "Altura Tanque 2", "Voltajes"]
+        self.label = ["Altura Tanque 1", "Altura Tanque 2", "Voltajes de Válvulas"]
         self.len_muestras = 19
         self.muestras = [deque([0 for _ in range(self.len_muestras)]) for y in range(len(self.origenes)-1)]
         self.muestras.append(deque([0, 0] for _ in range(self.len_muestras)))
