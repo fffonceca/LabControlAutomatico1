@@ -99,5 +99,5 @@ class Control():
                 if vm[3] >= sensi:
                     vm[3] -= sensi
                     cliente.razones['razon2'].set_value(vm[3])
-            state1 = " "
+            self.state1 = " "
         self.volt_razones = vm
