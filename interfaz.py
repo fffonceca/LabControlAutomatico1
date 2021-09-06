@@ -15,6 +15,8 @@ class Interfaz():
     def __init__(self, x_max=1280, y_max=600):
         pygame.init()
         # Screen
+        self.x_max = x_max
+        self.y_max = y_max
         self.screen = pygame.display.set_mode([x_max, y_max])
         # Fonts
         self.font13 = pygame.font.Font('freesansbold.ttf', 13)
@@ -26,7 +28,6 @@ class Interfaz():
         self.h_ref = [0, 0]
         self.razones = [0, 0]
         self.voltajes = [0, 0]
-        self.mouse_pos = [0, 0]
         self.modo = "A"
         self.alerta = False
         self.graficos = GraficosInterfaz(self)
@@ -113,8 +114,11 @@ class Interfaz():
             self.screen.blit(font.render('Modo: ' + 'Manual', True, c), (255, 430))
 
     def dibujar_alerta(self):
+        self.alerta = 1
         if(self.alerta == 1):
-            pygame.draw.rect(self.screen, (255, 255, 0), pygame.Rect(0, 200, 640, 45))
+            width_height = (160, 40)
+            pos_origen = (self.x_max//4 - width_height[0]//2 + 7, 203)
+            pygame.draw.rect(self.screen, (255, 255, 0), pygame.Rect(pos_origen, width_height))
             self.screen.blit(self.font35.render('ALERTA', True, (255, 0, 0)), (260, 208))
 
     def dibujar_agua(self):
@@ -148,9 +152,7 @@ class Interfaz():
         self.dibujar_h_t()
         self.dibujar_r_v()
         self.dibujar_modo()
-        if self.alerta:
-            self.dibujar_alerta()
-            print()
+        self.dibujar_alerta()
         self.dibujar_agua()
         if self.modo == "A":
             self.h_referencias()
@@ -175,7 +177,6 @@ class GraficosInterfaz():
         self.len_muestras = 19
         self.muestras = [deque([0 for _ in range(self.len_muestras)]) for y in range(len(self.origenes)-1)]
         self.muestras.append(deque([0, 0] for _ in range(self.len_muestras)))
-        print(self.muestras)
 
     def dibujar_cartesianas(self):
         for origen in self.origenes:

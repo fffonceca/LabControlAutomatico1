@@ -62,7 +62,6 @@ def eventos(interfaz: Interfaz, control: Control):
             if event.button == LEFT:
                 control.state1 = "R"
                 control.mouse_pos = pygame.mouse.get_pos()
-                interfaz.mouse_pos = control.mouse_pos
     return True
 
 
