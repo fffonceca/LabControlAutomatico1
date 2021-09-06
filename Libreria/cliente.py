@@ -72,7 +72,6 @@ class Cliente():
             self.sub_cv.subscribe_data_change(var)
 
     def subscribir_mv(self):  # Subscripación a las variables manipuladas
-        print("Suscribiendose")
         self.handler_mv = self.SubHandlerClass()
         self.sub_mv = self.client.create_subscription(self.periodo, self.handler_mv)
         for key, var in self.valvulas.items():
