@@ -311,7 +311,6 @@ class ConstantesInterfaz():
         self.input_rect5 = pygame.Rect(350, 550, 100, 32)
         self.input_rect6 = pygame.Rect(500, 500, 100, 32)
         self.input_rect7 = pygame.Rect(500, 550, 100, 32)
-
         self.input_rect8 = pygame.Rect(650, 500, 100, 32)
         self.input_rect9 = pygame.Rect(800, 500, 100, 32)
         self.input_rect10 = pygame.Rect(950, 500, 100, 32)
