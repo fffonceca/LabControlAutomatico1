@@ -257,8 +257,3 @@ def eventos(interfaz: Interfaz, control: Control):
                 elif (interfaz.constantes.state_cte == 17):
                     interfaz.constantes.texto16 += event.unicode
     return True
-
-
-def funcion_handler(node, val):
-    key = node.get_parent().get_display_name().Text
-    print('key: {} | val: {}'.format(key, val))
