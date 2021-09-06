@@ -1,6 +1,7 @@
 from interfaz import Interfaz
 from control import Control
 import pygame
+import sys
 
 
 def obtener(cliente, interfaz: Interfaz, control: Control):
@@ -33,7 +34,7 @@ def eventos(interfaz: Interfaz, control: Control):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-            quit()
+            sys.exit()
         if event.type == pygame.KEYDOWN:    # http://www.pygame.org/docs/ref/key.html
             if event.key == pygame.K_s:             # STOP
                 interfaz.modo = "STOP"
@@ -63,6 +64,198 @@ def eventos(interfaz: Interfaz, control: Control):
             if event.button == LEFT:
                 control.state1 = "R"
                 control.mouse_pos = pygame.mouse.get_pos()
+            if interfaz.constantes.input_rect.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 1
+            elif interfaz.constantes.input_rect1.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 2
+            elif interfaz.constantes.input_rect2.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 3
+            elif interfaz.constantes.input_rect3.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 4
+            elif interfaz.constantes.input_rect4.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 5
+            elif interfaz.constantes.input_rect5.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 6
+            elif interfaz.constantes.input_rect6.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 7
+            elif interfaz.constantes.input_rect7.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 8
+            elif interfaz.constantes.input_rect8.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 9
+            elif interfaz.constantes.input_rect9.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 10
+            elif interfaz.constantes.input_rect10.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 11
+            elif interfaz.constantes.input_rect11.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 12
+            elif interfaz.constantes.input_rect12.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 13
+            elif interfaz.constantes.input_rect13.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 14
+            elif interfaz.constantes.input_rect14.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 15
+            elif interfaz.constantes.input_rect15.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 16
+            elif interfaz.constantes.input_rect16.collidepoint(event.pos):
+                interfaz.constantes.state_cte = 17
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                if (interfaz.constantes.state_cte == 1 and interfaz.constantes.texto.isnumeric()):
+                    control.pid[0][0] = int(interfaz.constantes.texto)
+                    print("Cambiando Kp_1 a", interfaz.constantes.texto)
+                    interfaz.constantes.texto = ''
+                elif (interfaz.constantes.state_cte == 2 and
+                        interfaz.constantes.texto1.isnumeric()):
+                    control.pid[0][1] = int(interfaz.constantes.texto1)
+                    print("Cambiando Ki_1 a", interfaz.constantes.texto1)
+                    interfaz.constantes.texto1 = ''
+                elif (interfaz.constantes.state_cte == 3 and
+                        interfaz.constantes.texto2.isnumeric()):
+                    control.pid[0][2] = int(interfaz.constantes.texto2)
+                    print("Cambiando Kd_1 a", interfaz.constantes.texto2)
+                    interfaz.constantes.texto2 = ''
+
+                elif (interfaz.constantes.state_cte == 4 and
+                        interfaz.constantes.texto3.isnumeric()):
+                    control.pid[1][0] = int(interfaz.constantes.texto3)
+                    print("Cambiando Kp_2 a", interfaz.constantes.texto3)
+                    interfaz.constantes.texto3 = ''
+                elif (interfaz.constantes.state_cte == 5 and
+                        interfaz.constantes.texto4.isnumeric()):
+                    control.pid[1][1] = int(interfaz.constantes.texto4)
+                    print("Cambiando Ki_2 a", interfaz.constantes.texto4)
+                    interfaz.constantes.texto4 = ''
+                elif (interfaz.constantes.state_cte == 6 and
+                        interfaz.constantes.texto5.isnumeric()):
+                    control.pid[1][2] = int(interfaz.constantes.texto5)
+                    print("Cambiando Kd_2 a", interfaz.constantes.texto5)
+                    interfaz.constantes.texto5 = ''
+
+                elif (interfaz.constantes.state_cte == 7):
+                    WuP1 = interfaz.constantes.texto6
+                    interfaz.constantes.texto6 = ''
+                elif (interfaz.constantes.state_cte == 8):
+                    WuP2 = interfaz.constantes.texto7
+                    interfaz.constantes.texto7 = ''
+
+                elif (interfaz.constantes.state_cte == 9 and
+                        interfaz.constantes.texto8.isnumeric()):
+                    control.pid[2][0] = int(interfaz.constantes.texto8)
+                    print("Cambiando Kp_3 a", interfaz.constantes.texto8)
+                    interfaz.constantes.texto8 = ''
+                elif (interfaz.constantes.state_cte == 10 and
+                        interfaz.constantes.texto9.isnumeric()):
+                    control.pid[2][1] = int(interfaz.constantes.texto9)
+                    print("Cambiando Ki_3 a", interfaz.constantes.texto9)
+                    interfaz.constantes.texto9 = ''
+                elif (interfaz.constantes.state_cte == 11 and
+                        interfaz.constantes.texto10.isnumeric()):
+                    control.pid[2][2] = int(interfaz.constantes.texto10)
+                    print("Cambiando Kd_3 a", interfaz.constantes.texto10)
+                    interfaz.constantes.texto10 = ''
+
+                elif (interfaz.constantes.state_cte == 12 and
+                        interfaz.constantes.texto11.isnumeric()):
+                    control.pid[3][0] = int(interfaz.constantes.texto11)
+                    print("Cambiando Kp_4 a", interfaz.constantes.texto11)
+                    interfaz.constantes.texto11 = ''
+                elif (interfaz.constantes.state_cte == 13 and
+                        interfaz.constantes.texto12.isnumeric()):
+                    control.pid[3][1] = int(interfaz.constantes.texto12)
+                    print("Cambiando Ki_4 a", interfaz.constantes.texto12)
+                    interfaz.constantes.texto12 = ''
+                elif (interfaz.constantes.state_cte == 14 and
+                        interfaz.constantes.texto13.isnumeric()):
+                    control.pid[3][2] = int(interfaz.constantes.texto13)
+                    print("Cambiando Kd_4 a", interfaz.constantes.texto13)
+                    interfaz.constantes.texto13 = ''
+
+                elif (interfaz.constantes.state_cte == 15):
+                    WuP3 = texto14
+                    texto14 = ''
+                elif (interfaz.constantes.state_cte == 16):
+                    WuP4 = texto15
+                    texto15 = ''
+
+                elif (interfaz.constantes.state_cte == 17):
+                    RAM = texto16
+                    texto16 = ''
+
+            # Verificar retroceso
+            elif event.key == pygame.K_BACKSPACE:
+                if (interfaz.constantes.state_cte == 1):
+                    # obtenga la entrada de texto de 0 a -1, es decir, final.
+                    interfaz.constantes.texto = interfaz.constantes.texto[:-1]
+                elif (interfaz.constantes.state_cte == 2):
+                    interfaz.constantes.texto1 = interfaz.constantes.texto1[:-1]
+                elif (interfaz.constantes.state_cte == 3):
+                    interfaz.constantes.texto2 = interfaz.constantes.texto2[:-1]
+                elif (interfaz.constantes.state_cte == 4):
+                    interfaz.constantes.texto3 = interfaz.constantes.texto3[:-1]
+                elif (interfaz.constantes.state_cte == 5):
+                    interfaz.constantes.texto4 = interfaz.constantes.texto4[:-1]
+                elif (interfaz.constantes.state_cte == 6):
+                    interfaz.constantes.texto5 = interfaz.constantes.texto5[:-1]
+                elif (interfaz.constantes.state_cte == 7):
+                    interfaz.constantes.texto6 = interfaz.constantes.texto6[:-1]
+                elif (interfaz.constantes.state_cte == 8):
+                    interfaz.constantes.texto7 = interfaz.constantes.texto7[:-1]
+                elif (interfaz.constantes.state_cte == 9):
+                    interfaz.constantes.texto8 = interfaz.constantes.texto8[:-1]
+                elif (interfaz.constantes.state_cte == 10):
+                    interfaz.constantes.texto9 = interfaz.constantes.texto9[:-1]
+                elif (interfaz.constantes.state_cte == 11):
+                    interfaz.constantes.texto10 = interfaz.constantes.texto10[:-1]
+                elif (interfaz.constantes.state_cte == 12):
+                    interfaz.constantes.texto11 = interfaz.constantes.texto11[:-1]
+                elif (interfaz.constantes.state_cte == 13):
+                    interfaz.constantes.texto12 = interfaz.constantes.texto12[:-1]
+                elif (interfaz.constantes.state_cte == 14):
+                    interfaz.constantes.texto13 = interfaz.constantes.texto13[:-1]
+                elif (interfaz.constantes.state_cte == 15):
+                    interfaz.constantes.texto14 = interfaz.constantes.texto14[:-1]
+                elif (interfaz.constantes.state_cte == 16):
+                    interfaz.constantes.texto15 = interfaz.constantes.texto15[:-1]
+                elif (interfaz.constantes.state_cte == 17):
+                    interfaz.constantes.texto16 = interfaz.constantes.texto16[:-1]
+
+            # El estándar Unicode se usa para formación de cadenas
+            else:
+                if (interfaz.constantes.state_cte == 1):
+                    interfaz.constantes.texto += event.unicode
+                elif (interfaz.constantes.state_cte == 2):
+                    interfaz.constantes.texto1 += event.unicode
+                elif (interfaz.constantes.state_cte == 3):
+                    interfaz.constantes.texto2 += event.unicode
+                elif (interfaz.constantes.state_cte == 4):
+                    interfaz.constantes.texto3 += event.unicode
+                elif (interfaz.constantes.state_cte == 5):
+                    interfaz.constantes.texto4 += event.unicode
+                elif (interfaz.constantes.state_cte == 6):
+                    interfaz.constantes.texto5 += event.unicode
+                elif (interfaz.constantes.state_cte == 7):
+                    interfaz.constantes.texto6 += event.unicode
+                elif (interfaz.constantes.state_cte == 8):
+                    interfaz.constantes.texto7 += event.unicode
+                elif (interfaz.constantes.state_cte == 9):
+                    interfaz.constantes.texto8 += event.unicode
+                elif (interfaz.constantes.state_cte == 10):
+                    interfaz.constantes.texto9 += event.unicode
+                elif (interfaz.constantes.state_cte == 11):
+                    interfaz.constantes.texto10 += event.unicode
+                elif (interfaz.constantes.state_cte == 12):
+                    interfaz.constantes.texto11 += event.unicode
+                elif (interfaz.constantes.state_cte == 13):
+                    interfaz.constantes.texto12 += event.unicode
+                elif (interfaz.constantes.state_cte == 14):
+                    interfaz.constantes.texto13 += event.unicode
+                elif (interfaz.constantes.state_cte == 15):
+                    interfaz.constantes.texto14 += event.unicode
+                elif (interfaz.constantes.state_cte == 16):
+                    interfaz.constantes.texto15 += event.unicode
+                elif (interfaz.constantes.state_cte == 17):
+                    interfaz.constantes.texto16 += event.unicode
     return True
 
 
