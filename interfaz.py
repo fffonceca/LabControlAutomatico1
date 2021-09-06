@@ -12,7 +12,7 @@ BLUE = (0, 0, 255)
 
 
 class Interfaz():
-    def __init__(self, x_max=1280, y_max=600):
+    def __init__(self, x_max=1280, y_max=700):
         pygame.init()
         # Screen
         self.x_max = x_max
@@ -25,7 +25,7 @@ class Interfaz():
         self.screen.fill(BLANCO)
         self.alturas = [0, 0, 0, 0]
         self.temp = [0, 0, 0, 0]
-        self.h_ref = [0, 0]
+        self.h_ref = [25, 25]
         self.razones = [0, 0]
         self.voltajes = [0, 0]
         self.modo = "A"
@@ -69,6 +69,12 @@ class Interfaz():
                          True, (2, 25, 153)), (225, 310))
         self.screen.blit(self.font13.render('ref: ' + str(round(self.h_ref[1], 2)), True,
                          (2, 25, 153)), (365, 310))
+        pygame.draw.line(self.screen, (2, 25, 153),
+                         (200, self.h_ref[0]*(-146/50)+399),
+                         (300, self.h_ref[0]*(-146/50)+399), 2)
+        pygame.draw.line(self.screen, (0, 0, 0),
+                         (340, self.h_ref[1]*(-146/50)+399),
+                         (440, self.h_ref[1]*(-146/50)+399), 2)
 
     def dibujar_h_t(self):
         (h1, h2, h3, h4) = self.alturas
@@ -114,7 +120,6 @@ class Interfaz():
             self.screen.blit(font.render('Modo: ' + 'Manual', True, c), (255, 430))
 
     def dibujar_alerta(self):
-        self.alerta = 1
         if(self.alerta == 1):
             width_height = (160, 40)
             pos_origen = (self.x_max//4 - width_height[0]//2 + 7, 203)
@@ -168,15 +173,18 @@ class Interfaz():
 
 
 class GraficosInterfaz():
-    def __init__(self, interfaz: Interfaz, ):
+    def __init__(self, interfaz: Interfaz):
         self.screen = interfaz.screen
         self.res_x = 200
         self.res_y = 200
         # [Tanq1, Tanq2, Voltajes]
-        self.origenes = [(700, 450), (1020, 450), (860, 200)]
+        self.origenes = [(700, 470), (1020, 470), (860, 220)]
+        self.label = ["Altura Tanque 1", "Altura Tanque 2", "Voltajes"]
         self.len_muestras = 19
         self.muestras = [deque([0 for _ in range(self.len_muestras)]) for y in range(len(self.origenes)-1)]
         self.muestras.append(deque([0, 0] for _ in range(self.len_muestras)))
+        self.font = pygame.font.Font('freesansbold.ttf', 12)
+        self.font_graph = pygame.font.Font('freesansbold.ttf', 9)
 
     def dibujar_cartesianas(self):
         for origen in self.origenes:
@@ -202,6 +210,36 @@ class GraficosInterfaz():
             pygame.draw.circle(self.screen, BLUE,
                                (origen[0]+10*x+10, origen[1]-self.res_x*0.8*voltaje2), 3)
 
+    def dibujarlabel(self):
+        # Rallas verticales en eje x
+        for origen in self.origenes:
+            (pos_x, pos_y) = origen
+            for x in range(20):
+                pos_act_x = pos_x+10*x+10
+                pygame.draw.line(self.screen, BLACK, (pos_act_x, pos_y), (pos_act_x, pos_y+5), 2)
+        # Rallas horizontales en eje y
+            for y in range(20):
+                pos_act_y = pos_y-10*y-10
+                pygame.draw.line(self.screen, BLACK, (pos_x, pos_act_y), (pos_x-5, pos_act_y), 2)
+        # variable t en eje x
+            self.screen.blit(self.font.render("t", True, BLACK), (pos_x+self.res_x, pos_y+10))
+        # Labels
+        for pos in range(len(self.origenes)):
+            (pos_x, pos_y) = self.origenes[pos]
+            self.screen.blit(self.font.render(self.label[pos], True, BLACK),
+                             (pos_x+40, pos_y-self.res_y-20))
+        for pos in range(len(self.origenes)-1):
+            (pos_x, pos_y) = self.origenes[pos]
+            # Numeros altura en eje y
+            for y in range(20):
+                pos_act_y = pos_y-10*y-14
+                self.screen.blit(self.font_graph.render(str(int(50*y/19))+" cm", True, BLACK), (pos_x-34, pos_act_y))
+        (pos_x, pos_y) = self.origenes[-1]
+        # Numeros altura en eje y de voltaje
+        for y in range(20):
+            pos_act_y = pos_y-10*y-14
+            self.screen.blit(self.font_graph.render(str(int(y/19))+"."+str(int(y*10/19))+" V", True, BLACK), (pos_x-35, pos_act_y))
+
     def actualizar_muestras(self, alturas, voltajes):
         for i in range(len(self.muestras)-1):
             lista = self.muestras[i]
@@ -213,6 +251,7 @@ class GraficosInterfaz():
 
     def actualizar(self):
         self.dibujar_cartesianas()
+        self.dibujarlabel()
         self.dibujar_muestras()
 
 
