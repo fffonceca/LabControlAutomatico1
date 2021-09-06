@@ -7,6 +7,8 @@ BLACK = (0, 0, 0)
 CIAN = (0, 255, 255)
 BLANCO = (255, 255, 255)
 RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
 
 
 class Interfaz():
@@ -160,18 +162,20 @@ class Interfaz():
         self.temp = temp
         self.razones = razones
         self.voltajes = valvulas
-        self.graficos.actualizar_muestras(alturas)
+        self.graficos.actualizar_muestras(alturas, self.voltajes)
 
 
 class GraficosInterfaz():
-    def __init__(self, interfaz: Interfaz):
+    def __init__(self, interfaz: Interfaz, ):
         self.screen = interfaz.screen
         self.res_x = 200
         self.res_y = 200
-        # [Tanq1, Tanq2, Tanq3, Tanq4]
-        self.origenes = [(700, 550), (1020, 550), (700, 250), (1020, 250)]
+        # [Tanq1, Tanq2, Voltajes]
+        self.origenes = [(700, 450), (1020, 450), (860, 200)]
         self.len_muestras = 19
-        self.muestras = [deque([0 for i in range(self.len_muestras)]) for y in range(4)]
+        self.muestras = [deque([0 for _ in range(self.len_muestras)]) for y in range(len(self.origenes)-1)]
+        self.muestras.append(deque([0, 0] for _ in range(self.len_muestras)))
+        print(self.muestras)
 
     def dibujar_cartesianas(self):
         for origen in self.origenes:
@@ -181,19 +185,30 @@ class GraficosInterfaz():
             pygame.draw.line(self.screen, BLACK, origen, origen_derecha, 4)
 
     def dibujar_muestras(self):
-        for y in range(len(self.origenes)):
+        for y in range(len(self.origenes) - 1):
             origen = self.origenes[y]
             muestras = self.muestras[y]
             for x in range(len(muestras)):
                 altura = muestras[x]
-                pygame.draw.circle(self.screen, RED,
-                                   (origen[0] + 10*x+10, origen[1] - (18*altura/5 + 20)), 4)
+                pygame.draw.circle(self.screen, RED, (origen[0]+10*x+10,
+                                   origen[1]-(18*altura//5 + 20)), 4)
+        origen = self.origenes[-1]
+        muestras = self.muestras[-1]
+        for x in range(len(muestras)):
+            (voltaje1, voltaje2) = tuple(muestras[x])
+            pygame.draw.circle(self.screen, GREEN,
+                               (origen[0]+10*x+10, origen[1]-self.res_x*0.8*voltaje1), 4)
+            pygame.draw.circle(self.screen, BLUE,
+                               (origen[0]+10*x+10, origen[1]-self.res_x*0.8*voltaje2), 3)
 
-    def actualizar_muestras(self, alturas):
-        for i in range(len(self.muestras)):
+    def actualizar_muestras(self, alturas, voltajes):
+        for i in range(len(self.muestras)-1):
             lista = self.muestras[i]
             lista.rotate(-1)
             lista[-1] = alturas[i]
+        lista = self.muestras[-1]
+        lista.rotate(-1)
+        lista[-1] = voltajes
 
     def actualizar(self):
         self.dibujar_cartesianas()
