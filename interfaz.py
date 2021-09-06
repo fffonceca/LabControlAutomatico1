@@ -47,7 +47,7 @@ class Interfaz():
         pygame.draw.rect(self.screen, (201, 215, 154), pygame.Rect(450, 200, 150, 45))
 
         # Cuadro rojo claro
-        pygame.draw.rect(self.screen, (251, 215, 194), pygame.Rect(250, 430, 140, 35))#425, 45
+        pygame.draw.rect(self.screen, (251, 215, 194), pygame.Rect(250, 430, 140, 35))  # 425, 45
 
         # Cuadros morados claros
         pygame.draw.rect(self.screen, (201, 154, 215), pygame.Rect(200 - 150, 30, 140, 45))
@@ -82,18 +82,19 @@ class Interfaz():
         (t1, t2, t3, t4) = self.temp
         delta1 = 100
         c = BLACK
-        self.screen.blit(self.font13.render('Altura 1: '+str(round(h1, 2))+ ' cm', True, c), (55, 360))
+        self.screen.blit(self.font13.render('Altura 1: '+str(round(h1, 2)) + ' cm', True, c),
+                         (55, 360))
         self.screen.blit(self.font13.render('Temperatura 1: '+str(round(t1, 2)) + '°C', True, c),
                          (55, 250 + 5 + 20 + 105))
-        self.screen.blit(self.font13.render('Altura 2: ' + str(round(h2, 2))+ ' cm', True, c),
+        self.screen.blit(self.font13.render('Altura 2: ' + str(round(h2, 2)) + ' cm', True, c),
                          (340 + delta1 + 10 + 5, 250 + 5 + 105))
         self.screen.blit(self.font13.render('Temperatura 2: ' + str(round(t2, 2)) + '°C', True, c),
                          (340 + delta1 + 10 + 5, 250 + 5 + 20 + 105))
-        self.screen.blit(self.font13.render('Altura 3: ' + str(round(h3, 2))+ ' cm', True, c),
+        self.screen.blit(self.font13.render('Altura 3: ' + str(round(h3, 2)) + ' cm', True, c),
                          (200 - 150 + 5, 30 + 5))
         self.screen.blit(self.font13.render('Temperatura 3: ' + str(round(t3, 2)) + '°C', True, c),
                          (200 - 150 + 5, 30 + 5 + 20))
-        self.screen.blit(self.font13.render('Altura 4: ' + str(round(h4, 2))+ ' cm', True, c),
+        self.screen.blit(self.font13.render('Altura 4: ' + str(round(h4, 2)) + ' cm', True, c),
                          (340 + delta1 + 10 + 5, 30 + 5))
         self.screen.blit(self.font13.render('Temperatura 4: ' + str(round(t4, 2)) + '°C', True, c),
                          (340 + delta1 + 10 + 5, 30 + 5 + 20))
@@ -105,11 +106,11 @@ class Interfaz():
         c = BLACK
         self.screen.blit(font.render('Razón de Flujo 1: '+str(round(razon1, 2)), True, c),
                          (55, 205))
-        self.screen.blit(font.render('Voltaje Válvula 1: '+str(round(voltaje1, 2))+ ' V', True, c),
+        self.screen.blit(font.render('Voltaje Válvula 1: '+str(round(voltaje1, 2)) + ' V', True, c),
                          (55, 225))
         self.screen.blit(font.render('Razón de Flujo 2: '+str(round(razon2, 2)), True, c),
                          (455, 205))
-        self.screen.blit(font.render('Voltaje Válvula 2: '+str(round(voltaje2, 2))+ ' V', True, c),
+        self.screen.blit(font.render('Voltaje Válvula 2: '+str(round(voltaje2, 2)) + ' V', True, c),
                          (455, 225))
 
     def dibujar_modo(self):
@@ -254,6 +255,165 @@ class GraficosInterfaz():
         self.dibujar_cartesianas()
         self.dibujarlabel()
         self.dibujar_muestras()
+
+
+class ConstantesInterfaz():
+    def __init__(self, interfaz: Interfaz):
+        self.screen = interfaz.screen
+        self.font = pygame.font.Font('freesansbold.ttf', 12)
+        self.font2 = pygame.font.Font(None, 32)
+
+        self.texto = ''
+        self.texto1 = ''
+        self.texto2 = ''
+        self.texto3 = ''
+        self.texto4 = ''
+        self.texto5 = ''
+        self.texto6 = ''
+        self.texto7 = ''
+        self.texto8 = ''
+        self.texto9 = ''
+        self.texto10 = ''
+        self.texto11 = ''
+        self.texto12 = ''
+        self.texto13 = ''
+        self.texto14 = ''
+        self.texto15 = ''
+        self.texto16 = ''
+
+        self.Kp1_input = ''
+        self.Ki1_input = ''
+        self.Kd1_input = ''
+        self.Kp2_input = ''
+        self.Ki2_input = ''
+        self.Kd2_input = ''
+        self.Kp3_input = ''
+        self.Ki3_input = ''
+        self.Kd3_input = ''
+        self.Kp4_input = ''
+        self.Ki4_input = ''
+        self.Kd4_input = ''
+        self.WuP1 = ''
+        self.WuP2 = ''
+        self.WuP3 = ''
+        self.WuP4 = ''
+        self.RAM = ''
+
+        # create rectangle
+        self.input_rect = pygame.Rect(50, 500, 100, 32)
+        self.input_rect1 = pygame.Rect(200, 500, 100, 32)
+        self.input_rect2 = pygame.Rect(350, 500, 100, 32)
+        self.input_rect3 = pygame.Rect(50, 550, 100, 32)
+        self.input_rect4 = pygame.Rect(200, 550, 100, 32)
+        self.input_rect5 = pygame.Rect(350, 550, 100, 32)
+        self.input_rect6 = pygame.Rect(500, 500, 100, 32)
+        self.input_rect7 = pygame.Rect(500, 550, 100, 32)
+
+        self.input_rect8 = pygame.Rect(650, 500, 100, 32)
+        self.input_rect9 = pygame.Rect(800, 500, 100, 32)
+        self.input_rect10 = pygame.Rect(950, 500, 100, 32)
+        self.input_rect11 = pygame.Rect(650, 550, 100, 32)
+        self.input_rect12 = pygame.Rect(800, 550, 100, 32)
+        self.input_rect13 = pygame.Rect(950, 550, 100, 32)
+        self.input_rect14 = pygame.Rect(1100, 500, 100, 32)
+        self.input_rect15 = pygame.Rect(1100, 550, 100, 32)
+        self.input_rect16 = pygame.Rect(500, 450, 100, 32)
+        self.state_cte = 0
+
+    def input_text(self):
+        self.screen.blit(self.font.render('Kp 1 =', True, (0, 0, 0)), (10, 510))
+        self.screen.blit(self.font.render('Ki 1 =', True, (0, 0, 0)), (160, 510))
+        self.screen.blit(self.font.render('Kd 1 =', True, (0, 0, 0)), (310, 510))
+        self.screen.blit(self.font.render('Kp 2 =', True, (0, 0, 0)), (10, 555))
+        self.screen.blit(self.font.render('Ki 2 =', True, (0, 0, 0)), (160, 555))
+        self.screen.blit(self.font.render('Kd 2 =', True, (0, 0, 0)), (310, 555))
+        self.screen.blit(self.font.render('Kp 3 =', True, (0, 0, 0)), (610, 510))
+        self.screen.blit(self.font.render('Ki 3 =', True, (0, 0, 0)), (760, 510))
+        self.screen.blit(self.font.render('Kd 3 =', True, (0, 0, 0)), (910, 510))
+        self.screen.blit(self.font.render('Kp 4 =', True, (0, 0, 0)), (610, 555))
+        self.screen.blit(self.font.render('Ki 4 =', True, (0, 0, 0)), (760, 555))
+        self.screen.blit(self.font.render('Kd 4 =', True, (0, 0, 0)), (910, 555))
+        self.screen.blit(self.font.render('Wp 1 =', True, (0, 0, 0)), (460, 510))
+        self.screen.blit(self.font.render('Wp 2 =', True, (0, 0, 0)), (460, 555))
+        self.screen.blit(self.font.render('Wp 3 =', True, (0, 0, 0)), (1060, 510))
+        self.screen.blit(self.font.render('Wp 4 =', True, (0, 0, 0)), (1060, 555))
+        self.screen.blit(self.font.render('RAM =', True, (0, 0, 0)), (460, 460))
+
+        color = pygame.Color('lightskyblue3')
+
+        # dibuja un rectángulo y se pasa un argumento que debería estar en pantalla
+        pygame.draw.rect(self.screen, color, self.input_rect)
+        pygame.draw.rect(self.screen, color, self.input_rect1)
+        pygame.draw.rect(self.screen, color, self.input_rect2)
+        pygame.draw.rect(self.screen, color, self.input_rect3)
+        pygame.draw.rect(self.screen, color, self.input_rect4)
+        pygame.draw.rect(self.screen, color, self.input_rect5)
+        pygame.draw.rect(self.screen, color, self.input_rect6)
+        pygame.draw.rect(self.screen, color, self.input_rect7)
+        pygame.draw.rect(self.screen, color, self.input_rect8)
+        pygame.draw.rect(self.screen, color, self.input_rect9)
+        pygame.draw.rect(self.screen, color, self.input_rect10)
+        pygame.draw.rect(self.screen, color, self.input_rect11)
+        pygame.draw.rect(self.screen, color, self.input_rect12)
+        pygame.draw.rect(self.screen, color, self.input_rect13)
+        pygame.draw.rect(self.screen, color, self.input_rect14)
+        pygame.draw.rect(self.screen, color, self.input_rect15)
+        pygame.draw.rect(self.screen, color, self.input_rect16)
+
+        if (self.state_cte == 1):
+            # render en la posición indicada en los argumentos
+            self.screen.blit(self.font2.render(self.texto, True, (255, 255, 255)), (self.input_rect.x+5, self.input_rect.y+5))
+            # establecer el ancho del campo de texto para que el texto no se pueda obtener fuera de la
+            # entrada de texto del usuario
+            self.input_rect.w = max(50, self.font2.render(self.texto, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 2):
+            self.screen.blit(self.font2.render(self.texto1, True, (255, 255, 255)), (self.input_rect1.x+5, self.input_rect1.y+5))
+            self.input_rect1.w = max(50, self.font2.render(self.texto1, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 3):
+            self.screen.blit(self.font2.render(self.texto2, True, (255, 255, 255)), (self.input_rect2.x+5, self.input_rect2.y+5))
+            self.input_rect2.w = max(50, self.font2.render(self.texto2, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 4):
+            self.screen.blit(self.font2.render(self.texto3, True, (255, 255, 255)), (self.input_rect3.x+5, self.input_rect3.y+5))
+            self.input_rect3.w = max(50, self.font2.render(self.texto3, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 5):
+            self.screen.blit(self.font2.render(self.texto4, True, (255, 255, 255)), (self.input_rect4.x+5, self.input_rect4.y+5))
+            self.input_rect4.w = max(50, self.font2.render(self.texto4, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 6):
+            self.screen.blit(self.font2.render(self.texto5, True, (255, 255, 255)), (self.input_rect5.x+5, self.input_rect5.y+5))
+            self.input_rect5.w = max(50, self.font2.render(self.texto5, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 7):
+            self.screen.blit(self.font2.render(self.texto6, True, (255, 255, 255)), (self.input_rect6.x+5, self.input_rect6.y+5))
+            self.input_rect6.w = max(50, self.font2.render(self.texto6, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 8):
+            self.screen.blit(self.font2.render(self.texto7, True, (255, 255, 255)), (self.input_rect7.x+5, self.input_rect7.y+5))
+            self.input_rect7.w = max(50, self.font2.render(self.texto7, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 9):
+            self.screen.blit(self.font2.render(self.texto8, True, (255, 255, 255)), (self.input_rect8.x+5, self.input_rect8.y+5))
+            self.input_rect8.w = max(50, self.font2.render(self.texto8, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 10):
+            self.screen.blit(self.font2.render(self.texto9, True, (255, 255, 255)), (self.input_rect9.x+5, self.input_rect9.y+5))
+            self.input_rect9.w = max(50, self.font2.render(self.texto9, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 11):
+            self.screen.blit(self.font2.render(self.texto10, True, (255, 255, 255)), (self.input_rect10.x+5, self.input_rect10.y+5))
+            self.input_rect10.w = max(50, self.font2.render(self.texto10, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 12):
+            self.screen.blit(self.font2.render(self.texto11, True, (255, 255, 255)), (self.input_rect11.x+5, self.input_rect11.y+5))
+            self.input_rect11.w = max(50, self.font2.render(self.texto11, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 13):
+            self.screen.blit(self.font2.render(self.texto12, True, (255, 255, 255)), (self.input_rect12.x+5, self.input_rect12.y+5))
+            self.input_rect12.w = max(50, self.font2.render(self.texto12, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 14):
+            self.screen.blit(self.font2.render(self.texto13, True, (255, 255, 255)), (self.input_rect13.x+5, self.input_rect13.y+5))
+            self.input_rect13.w = max(50, self.font2.render(self.texto13, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 15):
+            self.screen.blit(self.font2.render(self.texto14, True, (255, 255, 255)), (self.input_rect14.x+5, self.input_rect14.y+5))
+            self.input_rect14.w = max(50, self.font2.render(self.texto14, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 16):
+            self.screen.blit(self.font2.render(self.texto15, True, (255, 255, 255)), (self.input_rect15.x+5, self.input_rect15.y+5))
+            self.input_rect15.w = max(50, self.font2.render(self.texto15, True, (255, 255, 255)).get_width()+10)
+        if(self.state_cte == 17):
+            self.screen.blit(self.font2.render(self.texto16, True, (255, 255, 255)), (self.input_rect16.x+5, self.input_rect16.y+5))
+            self.input_rect16.w = max(50, self.font2.render(self.texto16, True, (255, 255, 255)).get_width()+10)
 
 
 if __name__ == '__main__':
