@@ -24,7 +24,7 @@ class Interfaz():
         # Rellenar con Blanco
         self.screen.fill(BLANCO)
         self.alturas = [0, 0, 0, 0]
-        self.temp = [0, 0, 0, 0]
+        self.temp = [20, 20, 20, 20]
         self.h_ref = [25, 25]
         self.razones = [0, 0]
         self.voltajes = [0, 0]
