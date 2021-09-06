@@ -4,7 +4,7 @@ from Libreria.cliente import Cliente
 
 class Control():
     def __init__(self):
-        self.pid = [[100, 1, 1], [100, 1, 1], [100, 1, 1], [100, 1, 1]]
+        self.pid = [[0, 0, 0], [0.1, 0.01, 0.02], [0.1, 0.01, 0.02], [0, 0, 0]]
         self.h_error = [0, 0, 0, 0, 0, 0]
         self.state1 = ""
         self.alturas = [0, 0, 0, 0]
