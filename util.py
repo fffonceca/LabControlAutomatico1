@@ -33,6 +33,7 @@ def eventos(interfaz: Interfaz, control: Control):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
+            quit()
         if event.type == pygame.KEYDOWN:    # http://www.pygame.org/docs/ref/key.html
             if event.key == pygame.K_s:             # STOP
                 interfaz.modo = "STOP"
