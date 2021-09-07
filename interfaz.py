@@ -176,9 +176,11 @@ class GraficosInterfaz():
         self.res_y = 200
         # [Tanq1, Tanq2, Voltajes]
         self.origenes = [(710, 470), (1050, 470), (860, 220)]
-        self.label = ["Altura Tanque 1", "Altura Tanque 2", "Voltajes de Válvulas"]
         self.len_muestras = 19
-        self.muestras = [deque([0 for _ in range(self.len_muestras)]) for y in range(len(self.origenes)-1)]
+        len_origenes = len(self.origenes)
+        len_mues = self.len_muestras
+        self.label = ["Altura Tanque 1", "Altura Tanque 2", "Voltajes de Válvulas"]
+        self.muestras = [deque([0 for _ in range(len_mues)]) for y in range(len_origenes-1)]
         self.muestras.append(deque([0, 0] for _ in range(self.len_muestras)))
         self.font = pygame.font.Font('freesansbold.ttf', 12)
         self.font_graph = pygame.font.Font('freesansbold.ttf', 9)
@@ -230,13 +232,16 @@ class GraficosInterfaz():
             # Numeros altura en eje y
             for y in range(20):
                 pos_act_y = pos_y-10*y-14
-                self.screen.blit(self.font_graph.render(str(int(50*y/19))+" cm", True, BLACK), (pos_x-34, pos_act_y))
+                string_to_print = str(int(50*y/19))+" cm"
+                self.screen.blit(self.font_graph.render(string_to_print, True, BLACK),
+                                 (pos_x-34, pos_act_y))
         (pos_x, pos_y) = self.origenes[-1]
         # Numeros altura en eje y de voltaje
         for y in range(20):
             pos_act_y = pos_y-10*y-14
-            self.screen.blit(self.font_graph.render(str(int(y/19))+"."+str(int((y*100/19)%100))+" V",
-                             True, BLACK), (pos_x-35, pos_act_y))
+            string_to_print = str(int(y/19))+"."+str(int((y*100/19) % 100)) + " V"
+            self.screen.blit(self.font_graph.render(string_to_print, True, BLACK),
+                             (pos_x-35, pos_act_y))
 
     def actualizar_muestras(self, alturas, voltajes):
         for i in range(len(self.muestras)-1):
@@ -365,53 +370,76 @@ class ConstantesInterfaz():
             self.input_rect.w = max(50, self.font2.render(self.texto, True,
                                     (WHITE)).get_width()+10)
         if(self.state_cte == 2):
-            self.screen.blit(self.font2.render(self.texto1, True, WHITE), (self.input_rect1.x+5, self.input_rect1.y+5))
+            self.screen.blit(self.font2.render(self.texto1, True, WHITE),
+                             (self.input_rect1.x+5, self.input_rect1.y+5))
             self.input_rect1.w = max(50, self.font2.render(self.texto1, True, WHITE).get_width()+10)
         if(self.state_cte == 3):
-            self.screen.blit(self.font2.render(self.texto2, True, WHITE), (self.input_rect2.x+5, self.input_rect2.y+5))
+            self.screen.blit(self.font2.render(self.texto2, True, WHITE),
+                             (self.input_rect2.x+5, self.input_rect2.y+5))
             self.input_rect2.w = max(50, self.font2.render(self.texto2, True, WHITE).get_width()+10)
         if(self.state_cte == 4):
-            self.screen.blit(self.font2.render(self.texto3, True, WHITE), (self.input_rect3.x+5, self.input_rect3.y+5))
+            self.screen.blit(self.font2.render(self.texto3, True, WHITE),
+                             (self.input_rect3.x+5, self.input_rect3.y+5))
             self.input_rect3.w = max(50, self.font2.render(self.texto3, True, WHITE).get_width()+10)
         if(self.state_cte == 5):
-            self.screen.blit(self.font2.render(self.texto4, True, WHITE), (self.input_rect4.x+5, self.input_rect4.y+5))
+            self.screen.blit(self.font2.render(self.texto4, True, WHITE),
+                             (self.input_rect4.x+5, self.input_rect4.y+5))
             self.input_rect4.w = max(50, self.font2.render(self.texto4, True, WHITE).get_width()+10)
         if(self.state_cte == 6):
-            self.screen.blit(self.font2.render(self.texto5, True, WHITE), (self.input_rect5.x+5, self.input_rect5.y+5))
+            self.screen.blit(self.font2.render(self.texto5, True, WHITE),
+                             (self.input_rect5.x+5, self.input_rect5.y+5))
             self.input_rect5.w = max(50, self.font2.render(self.texto5, True, WHITE).get_width()+10)
         if(self.state_cte == 7):
-            self.screen.blit(self.font2.render(self.texto6, True, WHITE), (self.input_rect6.x+5, self.input_rect6.y+5))
+            self.screen.blit(self.font2.render(self.texto6, True, WHITE),
+                             (self.input_rect6.x+5, self.input_rect6.y+5))
             self.input_rect6.w = max(50, self.font2.render(self.texto6, True, WHITE).get_width()+10)
         if(self.state_cte == 8):
-            self.screen.blit(self.font2.render(self.texto7, True, WHITE), (self.input_rect7.x+5, self.input_rect7.y+5))
+            self.screen.blit(self.font2.render(self.texto7, True, WHITE),
+                             (self.input_rect7.x+5, self.input_rect7.y+5))
             self.input_rect7.w = max(50, self.font2.render(self.texto7, True, WHITE).get_width()+10)
         if(self.state_cte == 9):
-            self.screen.blit(self.font2.render(self.texto8, True, WHITE), (self.input_rect8.x+5, self.input_rect8.y+5))
+            self.screen.blit(self.font2.render(self.texto8, True, WHITE),
+                             (self.input_rect8.x+5, self.input_rect8.y+5))
             self.input_rect8.w = max(50, self.font2.render(self.texto8, True, WHITE).get_width()+10)
         if(self.state_cte == 10):
-            self.screen.blit(self.font2.render(self.texto9, True, WHITE), (self.input_rect9.x+5, self.input_rect9.y+5))
+            self.screen.blit(self.font2.render(self.texto9, True, WHITE),
+                             (self.input_rect9.x+5, self.input_rect9.y+5))
             self.input_rect9.w = max(50, self.font2.render(self.texto9, True, WHITE).get_width()+10)
         if(self.state_cte == 11):
-            self.screen.blit(self.font2.render(self.texto10, True, WHITE), (self.input_rect10.x+5, self.input_rect10.y+5))
-            self.input_rect10.w = max(50, self.font2.render(self.texto10, True, WHITE).get_width()+10)
+            self.screen.blit(self.font2.render(self.texto10, True, WHITE),
+                             (self.input_rect10.x+5, self.input_rect10.y+5))
+            self.input_rect10.w = max(50, self.font2.render(self.texto10,
+                                                            True, WHITE).get_width()+10)
         if(self.state_cte == 12):
-            self.screen.blit(self.font2.render(self.texto11, True, WHITE), (self.input_rect11.x+5, self.input_rect11.y+5))
-            self.input_rect11.w = max(50, self.font2.render(self.texto11, True, WHITE).get_width()+10)
+            self.screen.blit(self.font2.render(self.texto11, True, WHITE),
+                             (self.input_rect11.x+5, self.input_rect11.y+5))
+            self.input_rect11.w = max(50, self.font2.render(self.texto11,
+                                                            True, WHITE).get_width()+10)
         if(self.state_cte == 13):
-            self.screen.blit(self.font2.render(self.texto12, True, WHITE), (self.input_rect12.x+5, self.input_rect12.y+5))
-            self.input_rect12.w = max(50, self.font2.render(self.texto12, True, WHITE).get_width()+10)
+            self.screen.blit(self.font2.render(self.texto12, True, WHITE),
+                             (self.input_rect12.x+5, self.input_rect12.y+5))
+            self.input_rect12.w = max(50, self.font2.render(self.texto12,
+                                                            True, WHITE).get_width()+10)
         if(self.state_cte == 14):
-            self.screen.blit(self.font2.render(self.texto13, True, WHITE), (self.input_rect13.x+5, self.input_rect13.y+5))
-            self.input_rect13.w = max(50, self.font2.render(self.texto13, True, WHITE).get_width()+10)
+            self.screen.blit(self.font2.render(self.texto13, True, WHITE),
+                             (self.input_rect13.x+5, self.input_rect13.y+5))
+            self.input_rect13.w = max(50, self.font2.render(self.texto13, True,
+                                                            WHITE).get_width()+10)
         if(self.state_cte == 15):
-            self.screen.blit(self.font2.render(self.texto14, True, WHITE), (self.input_rect14.x+5, self.input_rect14.y+5))
-            self.input_rect14.w = max(50, self.font2.render(self.texto14, True, WHITE).get_width()+10)
+            self.screen.blit(self.font2.render(self.texto14, True, WHITE),
+                             (self.input_rect14.x+5, self.input_rect14.y+5))
+            self.input_rect14.w = max(50, self.font2.render(self.texto14,
+                                                            True, WHITE).get_width()+10)
         if(self.state_cte == 16):
-            self.screen.blit(self.font2.render(self.texto15, True, WHITE), (self.input_rect15.x+5, self.input_rect15.y+5))
-            self.input_rect15.w = max(50, self.font2.render(self.texto15, True, WHITE).get_width()+10)
+            self.screen.blit(self.font2.render(self.texto15, True, WHITE),
+                             (self.input_rect15.x+5, self.input_rect15.y+5))
+            self.input_rect15.w = max(50, self.font2.render(self.texto15,
+                                                            True, WHITE).get_width()+10)
         if(self.state_cte == 17):
-            self.screen.blit(self.font2.render(self.texto16, True, WHITE), (self.input_rect16.x+5, self.input_rect16.y+5))
-            self.input_rect16.w = max(50, self.font2.render(self.texto16, True, WHITE).get_width()+10)
+            self.screen.blit(self.font2.render(self.texto16, True, WHITE),
+                             (self.input_rect16.x+5, self.input_rect16.y+5))
+            self.input_rect16.w = max(50, self.font2.render(self.texto16,
+                                                            True, WHITE).get_width()+10)
 
 
 if __name__ == '__main__':
