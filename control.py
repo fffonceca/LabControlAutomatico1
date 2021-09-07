@@ -10,6 +10,7 @@ class Control():
         self.alturas = [0, 0, 0, 0]
         self.volt_razones = [0, 0, 0, 0]
         self.mouse_pos = [0, 0]
+        self.windup = [0, 1, 0, 1] #wi1, ws1, wi2, ws2
 
     def setear_variables(self, alturas, volt_razones):
         self.alturas = alturas
@@ -52,14 +53,14 @@ class Control():
                 Kd4*(h_error[3]-h_error[4]+h_error[5])/Ts
 
             # ANTI WINDUP
-            if vm[0] > 1:
-                vm[0] = 1
-            elif vm[0] < 0:
-                vm[0] = 0
-            if vm[1] > 1:
-                vm[1] = 1
-            elif vm[1] < 0:
-                vm[1] = 0
+            if vm[0] > self.windup[1]:
+                vm[0] = self.windup[1]
+            elif vm[0] < self.windup[0]:
+                vm[0] = self.windup[0]
+            if vm[1] > self.windup[3]:
+                vm[1] = self.windup[3]
+            elif vm[1] < self.windup[2]:
+                vm[1] = self.windup[2]
             cliente.valvulas['valvula1'].set_value(vm[0])
             cliente.valvulas['valvula2'].set_value(vm[1])
 

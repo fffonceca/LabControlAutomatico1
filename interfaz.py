@@ -4,7 +4,7 @@ import pygame
 
 
 class Interfaz():
-    def __init__(self, x_max=1280, y_max=600):
+    def __init__(self, x_max=1280, y_max=700): #650
         # Screen
         self.x_max = x_max
         self.y_max = y_max
@@ -178,7 +178,7 @@ class GraficosInterfaz():
         self.len_muestras = 19
         len_origenes = len(self.origenes)
         len_mues = self.len_muestras
-        self.label = ["Altura Tanque 1", "Altura Tanque 2", "Voltajes de Válvulas"]
+        self.label = ["  Altura Tanque 1", "  Altura Tanque 2", " Voltajes de Válvulas"]
         self.muestras = [deque([0 for _ in range(len_mues)]) for y in range(len_origenes-1)]
         self.muestras.append(deque([0, 0] for _ in range(self.len_muestras)))
         self.font = pygame.font.Font('freesansbold.ttf', 12)
@@ -301,43 +301,43 @@ class ConstantesInterfaz():
         self.RAM = ''
 
         # create rectangle
-        self.input_rect = pygame.Rect(50, 500, 100, 32)
-        self.input_rect1 = pygame.Rect(200, 500, 100, 32)
-        self.input_rect2 = pygame.Rect(350, 500, 100, 32)
-        self.input_rect3 = pygame.Rect(50, 550, 100, 32)
-        self.input_rect4 = pygame.Rect(200, 550, 100, 32)
-        self.input_rect5 = pygame.Rect(350, 550, 100, 32)
-        self.input_rect6 = pygame.Rect(500, 500, 100, 32)
-        self.input_rect7 = pygame.Rect(500, 550, 100, 32)
-        self.input_rect8 = pygame.Rect(650, 500, 100, 32)
-        self.input_rect9 = pygame.Rect(800, 500, 100, 32)
-        self.input_rect10 = pygame.Rect(950, 500, 100, 32)
-        self.input_rect11 = pygame.Rect(650, 550, 100, 32)
-        self.input_rect12 = pygame.Rect(800, 550, 100, 32)
-        self.input_rect13 = pygame.Rect(950, 550, 100, 32)
-        self.input_rect14 = pygame.Rect(1100, 500, 100, 32)
-        self.input_rect15 = pygame.Rect(1100, 550, 100, 32)
-        self.input_rect16 = pygame.Rect(500, 450, 100, 32)
+        self.input_rect = pygame.Rect(50, 550, 100, 32)
+        self.input_rect1 = pygame.Rect(200, 550, 100, 32)
+        self.input_rect2 = pygame.Rect(350, 550, 100, 32)
+        self.input_rect3 = pygame.Rect(50, 600, 100, 32)
+        self.input_rect4 = pygame.Rect(200, 600, 100, 32)
+        self.input_rect5 = pygame.Rect(350, 600, 100, 32)
+        self.input_rect6 = pygame.Rect(500, 550, 100, 32)
+        self.input_rect7 = pygame.Rect(500, 600, 100, 32)
+        self.input_rect8 = pygame.Rect(650, 550, 100, 32)
+        self.input_rect9 = pygame.Rect(800, 550, 100, 32)
+        self.input_rect10 = pygame.Rect(950, 550, 100, 32)
+        self.input_rect11 = pygame.Rect(650, 600, 100, 32)
+        self.input_rect12 = pygame.Rect(800, 600, 100, 32)
+        self.input_rect13 = pygame.Rect(950, 600, 100, 32)
+        self.input_rect14 = pygame.Rect(1100, 550, 100, 32)
+        self.input_rect15 = pygame.Rect(1100, 600, 100, 32)
+        self.input_rect16 = pygame.Rect(500, 500, 100, 32)
         self.state_cte = 0
 
     def dibujar_constantes(self):
-        self.screen.blit(self.font.render('Kp 1 =', True, (0, 0, 0)), (10, 510))
-        self.screen.blit(self.font.render('Ki 1 =', True, (0, 0, 0)), (160, 510))
-        self.screen.blit(self.font.render('Kd 1 =', True, (0, 0, 0)), (310, 510))
-        self.screen.blit(self.font.render('Kp 2 =', True, (0, 0, 0)), (10, 555))
-        self.screen.blit(self.font.render('Ki 2 =', True, (0, 0, 0)), (160, 555))
-        self.screen.blit(self.font.render('Kd 2 =', True, (0, 0, 0)), (310, 555))
-        self.screen.blit(self.font.render('Kp 3 =', True, (0, 0, 0)), (610, 510))
-        self.screen.blit(self.font.render('Ki 3 =', True, (0, 0, 0)), (760, 510))
-        self.screen.blit(self.font.render('Kd 3 =', True, (0, 0, 0)), (910, 510))
-        self.screen.blit(self.font.render('Kp 4 =', True, (0, 0, 0)), (610, 555))
-        self.screen.blit(self.font.render('Ki 4 =', True, (0, 0, 0)), (760, 555))
-        self.screen.blit(self.font.render('Kd 4 =', True, (0, 0, 0)), (910, 555))
-        self.screen.blit(self.font.render('Wp 1 =', True, (0, 0, 0)), (460, 510))
-        self.screen.blit(self.font.render('Wp 2 =', True, (0, 0, 0)), (460, 555))
-        self.screen.blit(self.font.render('Wp 3 =', True, (0, 0, 0)), (1060, 510))
-        self.screen.blit(self.font.render('Wp 4 =', True, (0, 0, 0)), (1060, 555))
-        self.screen.blit(self.font.render('RAM =', True, (0, 0, 0)), (460, 460))
+        self.screen.blit(self.font.render('Kp 1 =', True, (0, 0, 0)), (10, 560))
+        self.screen.blit(self.font.render('Ki 1 =', True, (0, 0, 0)), (160, 560))
+        self.screen.blit(self.font.render('Kd 1 =', True, (0, 0, 0)), (310, 560))
+        self.screen.blit(self.font.render('Kp 2 =', True, (0, 0, 0)), (10, 605))
+        self.screen.blit(self.font.render('Ki 2 =', True, (0, 0, 0)), (160, 605))
+        self.screen.blit(self.font.render('Kd 2 =', True, (0, 0, 0)), (310, 605))
+        self.screen.blit(self.font.render('Kp 3 =', True, (0, 0, 0)), (610, 560))
+        self.screen.blit(self.font.render('Ki 3 =', True, (0, 0, 0)), (760, 560))
+        self.screen.blit(self.font.render('Kd 3 =', True, (0, 0, 0)), (910, 560))
+        self.screen.blit(self.font.render('Kp 4 =', True, (0, 0, 0)), (610, 605))
+        self.screen.blit(self.font.render('Ki 4 =', True, (0, 0, 0)), (760, 605))
+        self.screen.blit(self.font.render('Kd 4 =', True, (0, 0, 0)), (910, 605))
+        self.screen.blit(self.font.render('Wi 1 =', True, (0, 0, 0)), (460, 560))
+        self.screen.blit(self.font.render('Ws 1 =', True, (0, 0, 0)), (460, 605))
+        self.screen.blit(self.font.render('Wi 2 =', True, (0, 0, 0)), (1060, 560))
+        self.screen.blit(self.font.render('Ws 2 =', True, (0, 0, 0)), (1060, 605))
+        self.screen.blit(self.font.render('DATA =', True, (0, 0, 0)), (460, 510))
 
         color = pygame.Color('lightskyblue3')
 

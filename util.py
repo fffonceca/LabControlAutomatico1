@@ -101,82 +101,75 @@ def eventos(interfaz: Interfaz, control: Control):
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                if (interfaz.constantes.state_cte == 1 and interfaz.constantes.texto.isnumeric()):
-                    control.pid[0][0] = int(interfaz.constantes.texto)
+                if (interfaz.constantes.state_cte == 1):
+                    control.pid[0][0] = float(interfaz.constantes.texto)
                     print("Cambiando Kp_1 a", interfaz.constantes.texto)
                     interfaz.constantes.texto = ''
-                elif (interfaz.constantes.state_cte == 2 and
-                        interfaz.constantes.texto1.isnumeric()):
-                    control.pid[0][1] = int(interfaz.constantes.texto1)
+                elif (interfaz.constantes.state_cte == 2):
+                    control.pid[0][1] = float(interfaz.constantes.texto1)
                     print("Cambiando Ki_1 a", interfaz.constantes.texto1)
                     interfaz.constantes.texto1 = ''
-                elif (interfaz.constantes.state_cte == 3 and
-                        interfaz.constantes.texto2.isnumeric()):
-                    control.pid[0][2] = int(interfaz.constantes.texto2)
+                elif (interfaz.constantes.state_cte == 3):
+                    control.pid[0][2] = float(interfaz.constantes.texto2)
                     print("Cambiando Kd_1 a", interfaz.constantes.texto2)
                     interfaz.constantes.texto2 = ''
 
-                elif (interfaz.constantes.state_cte == 4 and
-                        interfaz.constantes.texto3.isnumeric()):
-                    control.pid[1][0] = int(interfaz.constantes.texto3)
+                elif (interfaz.constantes.state_cte == 4):
+                    control.pid[1][0] = float(interfaz.constantes.texto3)
                     print("Cambiando Kp_2 a", interfaz.constantes.texto3)
                     interfaz.constantes.texto3 = ''
-                elif (interfaz.constantes.state_cte == 5 and
-                        interfaz.constantes.texto4.isnumeric()):
-                    control.pid[1][1] = int(interfaz.constantes.texto4)
+                elif (interfaz.constantes.state_cte == 5):
+                    control.pid[1][1] = float(interfaz.constantes.texto4)
                     print("Cambiando Ki_2 a", interfaz.constantes.texto4)
                     interfaz.constantes.texto4 = ''
-                elif (interfaz.constantes.state_cte == 6 and
-                        interfaz.constantes.texto5.isnumeric()):
-                    control.pid[1][2] = int(interfaz.constantes.texto5)
+                elif (interfaz.constantes.state_cte == 6):
+                    control.pid[1][2] = float(interfaz.constantes.texto5)
                     print("Cambiando Kd_2 a", interfaz.constantes.texto5)
                     interfaz.constantes.texto5 = ''
 
                 elif (interfaz.constantes.state_cte == 7):
-                    WuP1 = interfaz.constantes.texto6
+                    control.windup[0] = float(interfaz.constantes.texto6)
+                    print("Cambiando WuP1 a", interfaz.constantes.texto6)
                     interfaz.constantes.texto6 = ''
                 elif (interfaz.constantes.state_cte == 8):
-                    WuP2 = interfaz.constantes.texto7
+                    control.windup[0] = float(interfaz.constantes.texto7)
+                    print("Cambiando WuP2 a", interfaz.constantes.texto7)
                     interfaz.constantes.texto7 = ''
 
-                elif (interfaz.constantes.state_cte == 9 and
-                        interfaz.constantes.texto8.isnumeric()):
-                    control.pid[2][0] = int(interfaz.constantes.texto8)
+                elif (interfaz.constantes.state_cte == 9):
+                    control.pid[2][0] = float(interfaz.constantes.texto8)
                     print("Cambiando Kp_3 a", interfaz.constantes.texto8)
                     interfaz.constantes.texto8 = ''
-                elif (interfaz.constantes.state_cte == 10 and
-                        interfaz.constantes.texto9.isnumeric()):
-                    control.pid[2][1] = int(interfaz.constantes.texto9)
+                elif (interfaz.constantes.state_cte == 10):
+                    control.pid[2][1] = float(interfaz.constantes.texto9)
                     print("Cambiando Ki_3 a", interfaz.constantes.texto9)
                     interfaz.constantes.texto9 = ''
-                elif (interfaz.constantes.state_cte == 11 and
-                        interfaz.constantes.texto10.isnumeric()):
-                    control.pid[2][2] = int(interfaz.constantes.texto10)
+                elif (interfaz.constantes.state_cte == 11):
+                    control.pid[2][2] = float(interfaz.constantes.texto10)
                     print("Cambiando Kd_3 a", interfaz.constantes.texto10)
                     interfaz.constantes.texto10 = ''
 
-                elif (interfaz.constantes.state_cte == 12 and
-                        interfaz.constantes.texto11.isnumeric()):
-                    control.pid[3][0] = int(interfaz.constantes.texto11)
+                elif (interfaz.constantes.state_cte == 12):
+                    control.pid[3][0] = float(interfaz.constantes.texto11)
                     print("Cambiando Kp_4 a", interfaz.constantes.texto11)
                     interfaz.constantes.texto11 = ''
-                elif (interfaz.constantes.state_cte == 13 and
-                        interfaz.constantes.texto12.isnumeric()):
-                    control.pid[3][1] = int(interfaz.constantes.texto12)
+                elif (interfaz.constantes.state_cte == 13):
+                    control.pid[3][1] = float(interfaz.constantes.texto12)
                     print("Cambiando Ki_4 a", interfaz.constantes.texto12)
                     interfaz.constantes.texto12 = ''
-                elif (interfaz.constantes.state_cte == 14 and
-                        interfaz.constantes.texto13.isnumeric()):
-                    control.pid[3][2] = int(interfaz.constantes.texto13)
+                elif (interfaz.constantes.state_cte == 14):
+                    control.pid[3][2] = float(interfaz.constantes.texto13)
                     print("Cambiando Kd_4 a", interfaz.constantes.texto13)
                     interfaz.constantes.texto13 = ''
 
                 elif (interfaz.constantes.state_cte == 15):
-                    WuP3 = texto14
-                    texto14 = ''
+                    control.windup[2] = float(interfaz.constantes.texto14)
+                    print("Cambiando WuP3 a", interfaz.constantes.texto14)
+                    interfaz.constantes.texto14 = ''
                 elif (interfaz.constantes.state_cte == 16):
-                    WuP4 = texto15
-                    texto15 = ''
+                    control.windup[3] = float(interfaz.constantes.texto15)
+                    print("Cambiando WuP4 a", interfaz.constantes.texto15)
+                    interfaz.constantes.texto15 = ''
 
                 elif (interfaz.constantes.state_cte == 17):
                     RAM = texto16
