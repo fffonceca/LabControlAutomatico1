@@ -42,10 +42,14 @@ class Control():
             (Kp3, Ki3, Kd3) = pid[2]
             (Kp4, Ki4, Kd4) = pid[3]
 
-            vm[0] += Kp1*(h_error[0]-h_error[1]) + Ki1*Ts*h_error[0] + Kd1*(h_error[0]-h_error[1]+h_error[2])/Ts
-            vm[0] += Kp2*(h_error[3]-h_error[4]) + Ki2*Ts*h_error[3] + Kd2*(h_error[3]-h_error[4]+h_error[5])/Ts
-            vm[1] += Kp3*(h_error[0]-h_error[1]) + Ki3*Ts*h_error[0] + Kd3*(h_error[0]-h_error[1]+h_error[2])/Ts
-            vm[1] += Kp4*(h_error[3]-h_error[4]) + Ki4*Ts*h_error[3] + Kd4*(h_error[3]-h_error[4]+h_error[5])/Ts
+            vm[0] += Kp1*(h_error[0]-h_error[1]) + Ki1*Ts*h_error[0] +\
+                Kd1*(h_error[0]-h_error[1]+h_error[2])/Ts
+            vm[0] += Kp2*(h_error[3]-h_error[4]) + Ki2*Ts*h_error[3] + \
+                Kd2*(h_error[3]-h_error[4]+h_error[5])/Ts
+            vm[1] += Kp3*(h_error[0]-h_error[1]) + Ki3*Ts*h_error[0] + \
+                Kd3*(h_error[0]-h_error[1]+h_error[2])/Ts
+            vm[1] += Kp4*(h_error[3]-h_error[4]) + Ki4*Ts*h_error[3] + \
+                Kd4*(h_error[3]-h_error[4]+h_error[5])/Ts
 
             # ANTI WINDUP
             if vm[0] > 1:
