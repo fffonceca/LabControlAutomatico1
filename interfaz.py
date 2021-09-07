@@ -253,7 +253,6 @@ class GraficosInterfaz():
         lista[-1][1] = voltajes[1]
 
     def actualizar(self, alturas, voltajes):
-        self.actualizar_muestras(alturas, voltajes)
         self.dibujar_cartesianas()
         self.dibujarlabel()
         self.dibujar_muestras()
