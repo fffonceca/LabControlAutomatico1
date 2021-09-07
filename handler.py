@@ -4,7 +4,26 @@ import globals
 
 def funcion_handler(node, val):
     key = node.get_parent().get_display_name().Text
-    print('key: {} | val: {}'.format(key, val))
+    variable = node.get_display_name().Text
+    if 'Tanque' in key:
+        pos = int(key[-1]) - 1
+        if variable == 'T':
+            globals.interfaz.temp[pos] = val
+        elif variable == 'h':
+            globals.interfaz.alturas[pos] = val
+            globals.control.alturas[pos] = val
+        else:
+            print("No se entiende variable")
+    elif 'Razon' in key:
+        pos = int(key[-1]) - 1
+        globals.interfaz.razones[pos] = val
+        print(key, variable, val)
+    elif 'Valvula' in key:
+        pos = int(key[-1]) - 1
+        globals.interfaz.voltajes[pos] = val
+        print(key, variable, val)
+    else:
+        print(key, variable, val)
 
 
 class SubHandler(object):
