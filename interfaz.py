@@ -8,6 +8,13 @@ class Interfaz():
         # Screen
         self.x_max = x_max
         self.y_max = y_max
+        self.alturas = [0, 0, 0, 0]
+        self.temp = [20, 20, 20, 20]
+        self.h_ref = [25, 25]
+        self.razones = [0, 0]
+        self.voltajes = [0, 0]
+        self.modo = "A"
+        self.alerta = False
 
     def init_interfaz(self):
         pygame.init()
@@ -17,13 +24,6 @@ class Interfaz():
         self.font35 = pygame.font.Font('freesansbold.ttf', 35)
         # Rellenar con Blanco
         self.screen.fill(WHITE)
-        self.alturas = [0, 0, 0, 0]
-        self.temp = [20, 20, 20, 20]
-        self.h_ref = [25, 25]
-        self.razones = [0, 0]
-        self.voltajes = [0, 0]
-        self.modo = "A"
-        self.alerta = False
         self.graficos = GraficosInterfaz(self)
         self.constantes = ConstantesInterfaz(self)
 
@@ -251,6 +251,9 @@ class GraficosInterfaz():
         lista = self.muestras[-1]
         lista.rotate(-1)
         lista[-1] = voltajes
+        for i in range(len(self.muestras)-1):
+            print("Alturas:", self.muestras[i])
+        print("Voltajes:", self.muestras[-1])
 
     def actualizar(self, alturas, voltajes):
         self.actualizar_muestras(alturas, voltajes)
