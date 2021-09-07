@@ -174,7 +174,6 @@ class GraficosInterfaz():
         self.screen = interfaz.screen
         self.res_x = 200
         self.res_y = 200
-        # [Tanq1, Tanq2, Voltajes]
         self.origenes = [(710, 470), (1050, 470), (860, 220)]
         self.len_muestras = 19
         len_origenes = len(self.origenes)
@@ -248,12 +247,10 @@ class GraficosInterfaz():
             lista = self.muestras[i]
             lista.rotate(-1)
             lista[-1] = alturas[i]
-        lista = self.muestras[-1]
-        lista.rotate(-1)
-        lista[-1] = voltajes
-        for i in range(len(self.muestras)-1):
-            print("Alturas:", self.muestras[i])
-        print("Voltajes:", self.muestras[-1])
+        lista = self.muestras[-1]  # lista de voltajes = [[1, 0], [1, 0], [0, 0]..., [0, 0]]
+        lista.rotate(-1)  # lista [[1, 0], [0, 0],...., [0, 0], [1,0]]
+        lista[-1][0] = voltajes[0]  # voltajes = [1, 0]
+        lista[-1][1] = voltajes[1]
 
     def actualizar(self, alturas, voltajes):
         self.actualizar_muestras(alturas, voltajes)
