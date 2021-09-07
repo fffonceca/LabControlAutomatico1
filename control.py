@@ -44,11 +44,11 @@ class Control():
 
             vm[0] += Kp1*(h_error[0]-h_error[1]) + Ki1*Ts*h_error[0] +\
                 Kd1*(h_error[0]-h_error[1]+h_error[2])/Ts
-            vm[0] += Kp2*(h_error[3]-h_error[4]) + Ki2*Ts*h_error[3] + \
+            vm[0] += Kp2*(h_error[3]-h_error[4]) + Ki2*Ts*h_error[3] +\
                 Kd2*(h_error[3]-h_error[4]+h_error[5])/Ts
-            vm[1] += Kp3*(h_error[0]-h_error[1]) + Ki3*Ts*h_error[0] + \
+            vm[1] += Kp3*(h_error[0]-h_error[1]) + Ki3*Ts*h_error[0] +\
                 Kd3*(h_error[0]-h_error[1]+h_error[2])/Ts
-            vm[1] += Kp4*(h_error[3]-h_error[4]) + Ki4*Ts*h_error[3] + \
+            vm[1] += Kp4*(h_error[3]-h_error[4]) + Ki4*Ts*h_error[3] +\
                 Kd4*(h_error[3]-h_error[4]+h_error[5])/Ts
 
             # ANTI WINDUP
@@ -62,6 +62,7 @@ class Control():
                 vm[1] = 0
             cliente.valvulas['valvula1'].set_value(vm[0])
             cliente.valvulas['valvula2'].set_value(vm[1])
+
             # ACTUALIZAR ERRORES
             h_error[5] = h_error[4]
             h_error[4] = h_error[3]
