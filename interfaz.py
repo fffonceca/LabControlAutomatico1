@@ -201,7 +201,7 @@ class GraficosInterfaz():
         self.screen = interfaz.screen
         self.res_x = 200
         self.res_y = 200
-        self.origenes = [(710, 470), (1050, 470), (1050, 220)]
+        self.origenes = [(710, 470), (980, 470), (980, 220)]
         self.len_muestras = 19
         len_origenes = len(self.origenes)
         len_mues = self.len_muestras
