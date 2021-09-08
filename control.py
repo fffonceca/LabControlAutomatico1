@@ -17,7 +17,7 @@ class Control():
         self.volt_razones = volt_razones
 
     def actualizar(self, cliente: Cliente, interfaz: Interfaz):
-        sensi = 0.1
+        sensi = 0.05
         Ts = 0.01
         h_error = self.h_error
         pid = self.pid
@@ -70,40 +70,40 @@ class Control():
             h_error[2] = h_error[1]
             h_error[1] = h_error[0]
             self.h_error = h_error
-        else:
-            # VARIACIÓN DE VOLTAJE
-            if self.state1 == "SV1":
-                if vm[0] <= (1 - sensi):
-                    vm[0] += sensi
-                    cliente.valvulas['valvula1'].set_value(vm[0])
-            elif self.state1 == "BV1":
-                if vm[0] >= sensi:
-                    vm[0] -= sensi
-                    cliente.valvulas['valvula1'].set_value(vm[0])
-            elif self.state1 == "SV2":
-                if vm[1] <= (1 - sensi):
-                    vm[1] += sensi
-                    cliente.valvulas['valvula2'].set_value(vm[1])
-            elif self.state1 == "BV2":
-                if vm[1] >= sensi:
-                    vm[1] -= sensi
-                    cliente.valvulas['valvula2'].set_value(vm[1])
-            # VARIACIÓN DE RAZONES
-            elif self.state1 == "SF1":
-                if vm[2] <= (1 - sensi):
-                    vm[2] += sensi
-                    cliente.razones['razon1'].set_value(vm[2])
-            elif self.state1 == "BF1":
-                if vm[2] >= sensi:
-                    vm[2] -= sensi
-                    cliente.razones['razon1'].set_value(vm[2])
-            elif self.state1 == "SF2":
-                if vm[3] <= (1 - sensi):
-                    vm[3] += sensi
-                    cliente.razones['razon2'].set_value(vm[3])
-            elif self.state1 == "BF2":
-                if vm[3] >= sensi:
-                    vm[3] -= sensi
-                    cliente.razones['razon2'].set_value(vm[3])
+
+        # VARIACIÓN DE VOLTAJE
+        if self.state1 == "SV1":
+            if vm[0] <= (1 - sensi):
+                vm[0] += sensi
+                cliente.valvulas['valvula1'].set_value(vm[0])
+        elif self.state1 == "BV1":
+            if vm[0] >= sensi:
+                vm[0] -= sensi
+                cliente.valvulas['valvula1'].set_value(vm[0])
+        elif self.state1 == "SV2":
+            if vm[1] <= (1 - sensi):
+                vm[1] += sensi
+                cliente.valvulas['valvula2'].set_value(vm[1])
+        elif self.state1 == "BV2":
+            if vm[1] >= sensi:
+                vm[1] -= sensi
+                cliente.valvulas['valvula2'].set_value(vm[1])
+        # VARIACIÓN DE RAZONES
+        elif self.state1 == "SF1":
+            if vm[2] <= (1 - sensi):
+                vm[2] += sensi
+                cliente.razones['razon1'].set_value(vm[2])
+        elif self.state1 == "BF1":
+            if vm[2] >= sensi:
+                vm[2] -= sensi
+                cliente.razones['razon1'].set_value(vm[2])
+        elif self.state1 == "SF2":
+            if vm[3] <= (1 - sensi):
+                vm[3] += sensi
+                cliente.razones['razon2'].set_value(vm[3])
+        elif self.state1 == "BF2":
+            if vm[3] >= sensi:
+                vm[3] -= sensi
+                cliente.razones['razon2'].set_value(vm[3])
             self.state1 = " "
         self.volt_razones = vm
