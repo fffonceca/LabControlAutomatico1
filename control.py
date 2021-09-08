@@ -1,10 +1,10 @@
 from interfaz import Interfaz
 from Libreria.cliente import Cliente
-
+from parametros import PID_INICIAL
 
 class Control():
     def __init__(self):
-        self.pid = [[0, 0, 0], [0.1, 0.01, 0.02], [0.1, 0.01, 0.02], [0, 0, 0]]
+        self.pid = PID_INICIAL
         self.h_error = [0, 0, 0, 0, 0, 0]
         self.state1 = ""
         self.alturas = [0, 0, 0, 0]
