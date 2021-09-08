@@ -27,6 +27,7 @@ class Servidor_OPCUA:
         Namespace = namespace(self.objects, idx, self.server) # Se declaran todas las variables del nuevo namespace
         self.namespaces[nombre] = Namespace
 
+
     def start(self):
         global alarma, valor_alarma, mensaje_alarma
         self.server.start()
@@ -42,7 +43,9 @@ class Servidor_OPCUA:
             self.server.stop()
 
 
+
 server = Servidor_OPCUA()
 server.new_namespace(uri='Tanques', namespace=TanquesNamespace, nombre='Tanques')
-# server.new_namespace(uri='Espesador', namespace=EspesadorNamespace, nombre='Espesador')
+#server.new_namespace(uri='Espesador', namespace=EspesadorNamespace, nombre='Espesador')
 server.start()
+

@@ -43,7 +43,7 @@ alarma3 = False
 alarma4 = False
 valor_alarma = 0
 def funcion_handler(node, val, th, dir):
-    global mensaje_alarma, alarma1, alarma2, alarma3, alarma4, valor_alarma
+    global mensaje_alarma, alarma1,alarma2, alarma3, alarma4, valor_alarma
     padre = node.get_parent().get_display_name().Text
     if (dir == 'menor' and val <= th) or (dir == 'mayor' and val >= th):
         if padre == 'Tanque1':
@@ -135,6 +135,7 @@ class TanquesNamespace:
 
         self.alarma_nivel = self.server.get_event_generator(alarm_type, obj)
 
+
         # Se inicial el buffer para guardar datos recientes de cada una de las variables y poder hacer preprocesamiento por batch
         directorio = 'historial'
         if not os.path.exists(directorio):
@@ -143,16 +144,18 @@ class TanquesNamespace:
         db = HistorySQLite("{}/Tanques_historial.sql".format(directorio))
         self.server.iserver.history_manager.set_storage(db) # Se dice que en esta base de datos se guardará el historial
 
+
+
     def subscripciones(self):
         # Suscripción a los cambios de valor de los niveles y temperaturas simuladas
         th1 = 10
         th2 = 40
-
         handler_niveles = SubHandler(th1, 'menor') # Qué es lo que activa la alarma
         handler_temperaturas = SubHandler(th2, 'mayor')
 
         sub_niveles = self.server.create_subscription(100, handler_niveles) # Revisa cada 1000 milisegundos la variables
         sub_temperaturas = self.server.create_subscription(100, handler_temperaturas)
+
 
         for i in range(len(self.niveles)): # FInalmente se realizan las subscripciones
             sub_niveles.subscribe_data_change(self.niveles[i])
@@ -172,4 +175,4 @@ class TanquesNamespace:
             self.alarma_nivel.event.Nivel = float(valor_alarma)
             self.alarma_nivel.event.Mensaje = mensaje_alarma
             self.alarma_nivel.trigger(message=mensaje_alarma)
-            # print(self.alarma_nivel)
+            #print(self.alarma_nivel)

@@ -5,10 +5,9 @@ import matplotlib.pyplot as plt
 import pygame
 import time
 import sys
-from cliente import Cliente  # cliente OPCUA
+from cliente import Cliente # cliente OPCUA
 import random
 import threading
-
 
 class QuadrupleTank():
     def __init__(self, x0, Hmax, voltmax):
@@ -393,7 +392,7 @@ class Interfaz_grafica():
 ######################## Cliente opc ####################################
 
 # Se declaran después cuando se haga el controlador
-variables_manipuladas = {'Valvula1': 0, 'Valvula2': 0 , 'Razon1': 0, 'Razon2': 0}
+variables_manipuladas = {'Valvula1': 0, 'Valvula2':0 , 'Razon1':0, 'Razon2':0}
 
 # Función que se suscribe
 def funcion_handler(node, val):
