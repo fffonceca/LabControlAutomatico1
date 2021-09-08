@@ -268,6 +268,16 @@ class GraficosInterfaz():
             string_to_print = str(int(y/19))+"."+str(int((y*100/19) % 100)) + " V"
             self.screen.blit(self.font_graph.render(string_to_print, True, BLACK),
                              (pos_x-35, pos_act_y))
+        # Dibujar leyenda voltaje 1 y voltaje 2
+        pos_circulo_1 = (pos_x + self.res_x + 20, pos_y - 3*self.res_y//4)
+        pos_leyenda_1 = (pos_circulo_1[0] + 10, pos_circulo_1[1] - 7)
+        pygame.draw.circle(self.screen, GREEN, pos_circulo_1, 5)
+        self.screen.blit(self.font.render("Voltaje 1", True, BLACK), pos_leyenda_1)
+
+        pos_circulo_2 = (pos_x + self.res_x + 20, pos_y - 3*self.res_y//4 + 30)
+        pos_leyenda_2 = (pos_circulo_2[0] + 10, pos_circulo_2[1] - 7)
+        pygame.draw.circle(self.screen, BLUE, pos_circulo_2, 5)
+        self.screen.blit(self.font.render("Voltaje 2", True, BLACK), pos_leyenda_2)
 
     def dibujar_refs(self, interfaz):
         refs = interfaz.h_ref
