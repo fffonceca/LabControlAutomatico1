@@ -344,7 +344,7 @@ class ConstantesInterfaz():
         self.input_rect13 = pygame.Rect(960, 600, 100, 32)
         self.input_rect14 = pygame.Rect(1110, 550, 100, 32)
         self.input_rect15 = pygame.Rect(1110, 600, 100, 32)
-        self.input_rect16 = pygame.Rect(510, 500, 100, 32)
+        self.input_rect16 = pygame.Rect(70, 500, 100, 32)
         self.state_cte = 0
 
     def dibujar_constantes(self):

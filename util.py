@@ -18,8 +18,9 @@ class BufferCircular():
 
     def insertar_dato(self, interfaz, control):
         self.datos.rotate(-1)
-        self.datos[-1] = Estructura(interfaz.alturas, interfaz.h_ref, interfaz.voltajes,
-                                    control.pid, interfaz.razones)
+        self.datos[-1] = Estructura(interfaz.alturas.copy(), interfaz.h_ref.copy(),
+                                    interfaz.voltajes.copy(), control.pid.copy(),
+                                    interfaz.razones.copy())
 
     def inicializar(self, RAM):
         self.RAM = RAM
