@@ -2,6 +2,7 @@ from interfaz import Interfaz
 from Libreria.cliente import Cliente
 from parametros import PID_INICIAL
 
+
 class Control():
     def __init__(self):
         self.pid = PID_INICIAL
