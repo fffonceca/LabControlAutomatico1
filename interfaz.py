@@ -185,7 +185,7 @@ class Interfaz():
         self.dibujar_parametros(control)
         if self.modo == "A":
             self.h_referencias()
-        self.graficos.actualizar(self.alturas, self.voltajes)
+        self.graficos.actualizar(self.h_ref)
         self.constantes.dibujar_constantes()
         pygame.display.flip()
 
@@ -235,7 +235,7 @@ class GraficosInterfaz():
             pygame.draw.circle(self.screen, BLUE,
                                (origen[0]+10*x+10, origen[1]-(self.res_x-10)*voltaje2-10), 3)
 
-    def dibujarlabel(self):
+    def dibujar_label(self):
         # Rallas verticales en eje x
         for origen in self.origenes:
             (pos_x, pos_y) = origen
@@ -269,6 +269,14 @@ class GraficosInterfaz():
             self.screen.blit(self.font_graph.render(string_to_print, True, BLACK),
                              (pos_x-35, pos_act_y))
 
+    def dibujar_refs(self, refs):
+        for pos in range(len(self.origenes)-1):
+            origen = self.origenes[pos]
+            altura = origen[1]-(18*refs[pos]//5 + 20)
+            izquierda = (origen[0], altura)
+            derecha = (origen[0] + self.res_x, altura)
+            pygame.draw.line(self.screen, (163, 73, 164), izquierda, derecha, 2)
+
     def actualizar_muestras(self, alturas, voltajes):
         for i in range(len(self.muestras)-1):
             lista = self.muestras[i]
@@ -279,9 +287,10 @@ class GraficosInterfaz():
         lista[-1][0] = voltajes[0]  # voltajes = [1, 0]
         lista[-1][1] = voltajes[1]
 
-    def actualizar(self, alturas, voltajes):
+    def actualizar(self, h_refs):
         self.dibujar_cartesianas()
-        self.dibujarlabel()
+        self.dibujar_label()
+        self.dibujar_refs(h_refs)
         self.dibujar_muestras()
 
 
