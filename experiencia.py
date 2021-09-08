@@ -1,5 +1,5 @@
-from Libreria.cliente import Cliente
 from handler import SubHandler as SubHandlerExp
+from Libreria.cliente import Cliente
 from util import obtener, eventos
 import parametros
 import time
@@ -10,9 +10,10 @@ import globals
 def thread_interfaz(cliente):
     globals.interfaz.init_interfaz()
     obtener(cliente, globals.interfaz, globals.control)
+    globals.correr_control = True
     i = 0
     while True:
-        eventos(globals.interfaz, globals.control)
+        eventos(globals.interfaz, globals.control, globals.buffer)
         if i % (parametros.PERIODO_GRAFICOS//parametros.PERIODO_INTERFAZ) == 0:
             globals.interfaz.graficos.actualizar_muestras(globals.interfaz.alturas,
                                                           globals.interfaz.voltajes)
@@ -23,8 +24,12 @@ def thread_interfaz(cliente):
 
 
 def thread_control(cliente):
+    while not globals.correr_control:
+        print("Control: Esperando datos iniciales...")
+        time.sleep(parametros.PERIODO_CONTROL)
     while True:
         globals.control.actualizar(cliente, globals.interfaz)
+        globals.buffer.insertar_dato(globals.interfaz, globals.control)
         time.sleep(parametros.PERIODO_CONTROL)
 
 
@@ -39,5 +44,3 @@ if __name__ == '__main__':
     hilo_control.start()
     cliente.subscribir_cv()
     cliente.subscribir_mv()
-    while True:
-        pass

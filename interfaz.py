@@ -4,7 +4,7 @@ import pygame
 
 
 class Interfaz():
-    def __init__(self, x_max=1280, y_max=700): #650
+    def __init__(self, x_max=1280, y_max=700):
         # Screen
         self.x_max = x_max
         self.y_max = y_max
