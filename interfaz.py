@@ -185,7 +185,7 @@ class Interfaz():
         self.dibujar_parametros(control)
         if self.modo == "A":
             self.h_referencias()
-        self.graficos.actualizar(self.h_ref)
+        self.graficos.actualizar(self)
         self.constantes.dibujar_constantes()
         pygame.display.flip()
 
@@ -269,13 +269,15 @@ class GraficosInterfaz():
             self.screen.blit(self.font_graph.render(string_to_print, True, BLACK),
                              (pos_x-35, pos_act_y))
 
-    def dibujar_refs(self, refs):
-        for pos in range(len(self.origenes)-1):
-            origen = self.origenes[pos]
-            altura = origen[1]-(18*refs[pos]//5 + 20)
-            izquierda = (origen[0], altura)
-            derecha = (origen[0] + self.res_x, altura)
-            pygame.draw.line(self.screen, (163, 73, 164), izquierda, derecha, 2)
+    def dibujar_refs(self, interfaz):
+        refs = interfaz.h_ref
+        if interfaz.modo == "A":
+            for pos in range(len(self.origenes)-1):
+                origen = self.origenes[pos]
+                altura = origen[1]-(18*refs[pos]//5 + 20)
+                izquierda = (origen[0], altura)
+                derecha = (origen[0] + self.res_x, altura)
+                pygame.draw.line(self.screen, (163, 73, 164), izquierda, derecha, 2)
 
     def actualizar_muestras(self, alturas, voltajes):
         for i in range(len(self.muestras)-1):
@@ -287,10 +289,10 @@ class GraficosInterfaz():
         lista[-1][0] = voltajes[0]  # voltajes = [1, 0]
         lista[-1][1] = voltajes[1]
 
-    def actualizar(self, h_refs):
+    def actualizar(self, interfaz):
         self.dibujar_cartesianas()
         self.dibujar_label()
-        self.dibujar_refs(h_refs)
+        self.dibujar_refs(interfaz)
         self.dibujar_muestras()
 
 
