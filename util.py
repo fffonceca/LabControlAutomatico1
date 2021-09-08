@@ -1,7 +1,48 @@
 from interfaz import Interfaz
 from control import Control
+from collections import namedtuple, deque
 import pygame
 import sys
+
+
+Estructura = namedtuple('Estructura_de_datos_G', ['Alturas', 'Referencias',
+                        'Voltajes', 'PID', 'Razones'])
+
+
+class BufferCircular():
+    def __init__(self, RAM):
+        self.inicializar(RAM)
+        self.path_file = 'datos.txt'
+        with open(self.path_file, mode='w', encoding='utf-8') as file:
+            file.write("Alturas,Referencias,Voltajes,pid,Razones\n")
+
+    def insertar_dato(self, interfaz, control):
+        self.datos.rotate(-1)
+        self.datos[-1] = Estructura(interfaz.alturas, interfaz.h_ref, interfaz.voltajes,
+                                    control.pid, interfaz.razones)
+
+    def inicializar(self, RAM):
+        self.RAM = RAM
+        self.datos = deque([0 for _ in range(self.RAM)])
+
+    def cargar_datos(self):
+        with open(self.path_file, mode='a', encoding='utf-8') as file:
+            sum = 0
+            for dato in self.datos:
+                if dato != 0:
+                    string_to_write = ""
+                    string_to_write += " ".join([str(a) for a in dato.Alturas])
+                    string_to_write += "," + " ".join([str(a) for a in dato.Referencias])
+                    string_to_write += "," + " ".join([str(a) for a in dato.Voltajes])
+                    x = list()
+                    for i in dato.PID:
+                        for y in i:
+                            x.append(str(y))
+                    string_to_write += "," + " ".join(x)
+                    string_to_write += "," + " ".join([str(a) for a in dato.Razones]) + "\n"
+                    file.write(string_to_write)
+                    sum += 1
+            print(f"Se escribieron {sum} datos")
 
 
 def obtener(cliente, interfaz: Interfaz, control: Control):
@@ -29,7 +70,7 @@ def obtener(cliente, interfaz: Interfaz, control: Control):
     control.setear_variables(alturas, [vm1, vm2, vr1, vr2])
 
 
-def eventos(interfaz: Interfaz, control: Control):
+def eventos(interfaz: Interfaz, control: Control, buffer: BufferCircular):
     LEFT = 1
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -50,8 +91,8 @@ def eventos(interfaz: Interfaz, control: Control):
                 interfaz.modo = "M"
             if event.key == pygame.K_a:             # TECLA A: AUTOMÁTICO
                 interfaz.modo = "A"
-            if event.key == pygame.K_m:             # TECLA G: guardar datos
-                control.state1 = "G"
+            if event.key == pygame.K_g:             # TECLA G: guardar datos
+                buffer.cargar_datos()
             if event.key == pygame.K_i:             # TECLA i: subir razon de flujo 1
                 control.state1 = "SF1"
             if event.key == pygame.K_k:             # TECLA k: bajar razon de flujo 1
@@ -98,6 +139,8 @@ def eventos(interfaz: Interfaz, control: Control):
                 interfaz.constantes.state_cte = 16
             elif interfaz.constantes.input_rect16.collidepoint(event.pos):
                 interfaz.constantes.state_cte = 17
+            else:
+                interfaz.constantes.state_cte = 0
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
@@ -171,9 +214,12 @@ def eventos(interfaz: Interfaz, control: Control):
                     print("Cambiando WuP4 a", interfaz.constantes.texto15)
                     interfaz.constantes.texto15 = ''
 
-                elif (interfaz.constantes.state_cte == 17):
-                    RAM = texto16
-                    texto16 = ''
+                elif (interfaz.constantes.state_cte == 17 and
+                      interfaz.constantes.texto16.isnumeric()):
+                    RAM = int(interfaz.constantes.texto16)
+                    buffer.inicializar(RAM)
+                    print("RAM ahora ocupa:", RAM)
+                    interfaz.constantes.texto16 = ''
 
             # Verificar retroceso
             elif event.key == pygame.K_BACKSPACE:
