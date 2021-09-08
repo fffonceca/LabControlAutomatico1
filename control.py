@@ -8,6 +8,7 @@ class Control():
         self.pid = PID_INICIAL
         self.h_error = [0, 0, 0, 0, 0, 0]
         self.state1 = ""
+        self.escalon_estado = 0
         self.alturas = [0, 0, 0, 0]
         self.volt_razones = [0, 0, 0, 0]
         self.mouse_pos = [0, 0]
@@ -102,6 +103,23 @@ class Control():
                 else:
                     vm[1] = 0
                     cliente.valvulas['valvula2'].set_value(vm[1])
+            elif self.state1 == "ESCALON":
+                if self.escalon_estado == 0:
+                    vm[0] = 0
+                    vm[1] = 0
+                    cliente.valvulas['valvula1'].set_value(vm[0])
+                    cliente.valvulas['valvula2'].set_value(vm[1])
+                    self.escalon_estado = 1
+                elif self.escalon_estado == 1:
+                    vm[0] = 1
+                    cliente.valvulas['valvula1'].set_value(vm[0])
+                    self.escalon_estado = 2
+                else:
+                    vm[0] = 1
+                    vm[1] = 1
+                    cliente.valvulas['valvula1'].set_value(vm[0])
+                    cliente.valvulas['valvula2'].set_value(vm[1])
+                    self.escalon_estado = 0
 
         # VARIACIÓN DE RAZONES
         if self.state1 == "SF1":
