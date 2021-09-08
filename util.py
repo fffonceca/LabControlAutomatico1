@@ -175,7 +175,7 @@ def eventos(interfaz: Interfaz, control: Control, buffer: BufferCircular):
                     print("Cambiando WuP1 a", interfaz.constantes.texto6)
                     interfaz.constantes.texto6 = ''
                 elif (interfaz.constantes.state_cte == 8):
-                    control.windup[0] = float(interfaz.constantes.texto7)
+                    control.windup[1] = float(interfaz.constantes.texto7)
                     print("Cambiando WuP2 a", interfaz.constantes.texto7)
                     interfaz.constantes.texto7 = ''
 

@@ -182,7 +182,7 @@ class Interfaz():
         self.dibujar_modo()
         self.dibujar_alerta()
         self.dibujar_agua()
-        # self.dibujar_parametros(control)
+        self.dibujar_parametros(control)
         if self.modo == "A":
             self.h_referencias()
         self.graficos.actualizar(self.alturas, self.voltajes)
