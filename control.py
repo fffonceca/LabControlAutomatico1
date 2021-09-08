@@ -10,7 +10,7 @@ class Control():
         self.alturas = [0, 0, 0, 0]
         self.volt_razones = [0, 0, 0, 0]
         self.mouse_pos = [0, 0]
-        self.windup = [0, 1, 0, 1] #wi1, ws1, wi2, ws2
+        self.windup = [0, 1, 0, 1]  # wi1, ws1, wi2, ws2
 
     def setear_variables(self, alturas, volt_razones):
         self.alturas = alturas
