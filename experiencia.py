@@ -17,7 +17,7 @@ def thread_interfaz(cliente):
         if i % (parametros.PERIODO_GRAFICOS//parametros.PERIODO_INTERFAZ) == 0:
             globals.interfaz.graficos.actualizar_muestras(globals.interfaz.alturas,
                                                           globals.interfaz.voltajes)
-        globals.interfaz.actualizar(globals.info_evento)
+        globals.interfaz.actualizar(globals.info_evento, globals.control)
         globals.info_evento = (False, 0)
         time.sleep(parametros.PERIODO_INTERFAZ)
         i += 1

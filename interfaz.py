@@ -42,7 +42,7 @@ class Interfaz():
         pygame.draw.rect(self.screen, (201, 215, 154), pygame.Rect(450, 200, 170, 45))
 
         # Cuadro rojo claro
-        pygame.draw.rect(self.screen, (251, 215, 194), pygame.Rect(250, 430, 140, 35))  # 425, 45
+        pygame.draw.rect(self.screen, (251, 215, 194), pygame.Rect(250, 430, 140, 35))
 
         # Cuadros morados claros
         pygame.draw.rect(self.screen, (201, 154, 215), pygame.Rect(200 - 150, 30, 140, 45))
@@ -147,7 +147,7 @@ class Interfaz():
         pygame.draw.rect(screen, (WHITE), pygame.Rect(340 + delta3, 30 + delta3, 96,
                          int(146 - h4 * (146/50))))
 
-    def actualizar(self, info_evento):
+    def actualizar(self, info_evento, control):
         self.alerta = info_evento[0]
         self.screen.fill(WHITE)
         self.dibujar_todo()
