@@ -217,25 +217,6 @@ class GraficosInterfaz():
             origen_derecha = (origen[0]+self.res_x, origen[1])
             pygame.draw.line(self.screen, BLACK, origen, origen_arriba, 4)
             pygame.draw.line(self.screen, BLACK, origen, origen_derecha, 4)
-
-    def dibujar_muestras(self):
-        for y in range(len(self.origenes) - 1):
-            origen = self.origenes[y]
-            muestras = self.muestras[y]
-            for x in range(len(muestras)):
-                altura = muestras[x]
-                pygame.draw.circle(self.screen, RED, (origen[0]+10*x+10,
-                                   origen[1]-(18*altura//5 + 20)), 4)
-        origen = self.origenes[-1]
-        muestras = self.muestras[-1]
-        for x in range(len(muestras)):
-            (voltaje1, voltaje2) = tuple(muestras[x])
-            pygame.draw.circle(self.screen, GREEN,
-                               (origen[0]+10*x+10, origen[1]-(self.res_x-10)*voltaje1-10), 4)
-            pygame.draw.circle(self.screen, BLUE,
-                               (origen[0]+10*x+10, origen[1]-(self.res_x-10)*voltaje2-10), 3)
-
-    def dibujar_label(self):
         # Rallas verticales en eje x
         for origen in self.origenes:
             (pos_x, pos_y) = origen
@@ -248,24 +229,44 @@ class GraficosInterfaz():
                 pygame.draw.line(self.screen, BLACK, (pos_x, pos_act_y), (pos_x-5, pos_act_y), 2)
         # variable t en eje x
             self.screen.blit(self.font.render("t", True, BLACK), (pos_x+self.res_x, pos_y+10))
+
+    def dibujar_muestras(self):
+        for y in range(len(self.origenes) - 1):
+            origen = self.origenes[y]
+            muestras = self.muestras[y]
+            for x in range(len(muestras)):
+                altura = muestras[x]
+                pygame.draw.circle(self.screen, RED, (origen[0]+10*x+10,
+                                   origen[1]-(18*altura/5 + 10)), 4)
+        origen = self.origenes[-1]
+        muestras = self.muestras[-1]
+        for x in range(len(muestras)):
+            (voltaje1, voltaje2) = tuple(muestras[x])
+            pygame.draw.circle(self.screen, GREEN,
+                               (origen[0]+10*x+10, origen[1]-(self.res_x-10)*voltaje1-10), 4)
+            pygame.draw.circle(self.screen, BLUE,
+                               (origen[0]+10*x+10, origen[1]-(self.res_x-10)*voltaje2-10), 3)
+
+    def dibujar_label(self):
         # Labels
         for pos in range(len(self.origenes)):
             (pos_x, pos_y) = self.origenes[pos]
             self.screen.blit(self.font.render(self.label[pos], True, BLACK),
                              (pos_x+40, pos_y-self.res_y-20))
+        # Numeros altura en eje y
         for pos in range(len(self.origenes)-1):
             (pos_x, pos_y) = self.origenes[pos]
-            # Numeros altura en eje y
             for y in range(20):
                 pos_act_y = pos_y-10*y-14
                 string_to_print = str(int(50*y/19))+" cm"
                 self.screen.blit(self.font_graph.render(string_to_print, True, BLACK),
                                  (pos_x-34, pos_act_y))
-        (pos_x, pos_y) = self.origenes[-1]
         # Numeros altura en eje y de voltaje
+        (pos_x, pos_y) = self.origenes[-1]
         for y in range(20):
             pos_act_y = pos_y-10*y-14
-            string_to_print = str(int(y/19))+"."+str(int((y*100/19) % 100)) + " V"
+            num = str(y/19)
+            string_to_print = num[0] + "." + num[2:4] + " V"
             self.screen.blit(self.font_graph.render(string_to_print, True, BLACK),
                              (pos_x-35, pos_act_y))
         # Dibujar leyenda voltaje 1 y voltaje 2
