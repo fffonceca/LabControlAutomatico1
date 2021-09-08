@@ -77,17 +77,29 @@ class Control():
                 if vm[0] <= (1 - sensi):
                     vm[0] += sensi
                     cliente.valvulas['valvula1'].set_value(vm[0])
+                else:
+                    vm[0] = 1
+                    cliente.valvulas['valvula1'].set_value(vm[0])
             elif self.state1 == "BV1":
                 if vm[0] >= sensi:
                     vm[0] -= sensi
+                    cliente.valvulas['valvula1'].set_value(vm[0])
+                else:
+                    vm[0] = 0
                     cliente.valvulas['valvula1'].set_value(vm[0])
             elif self.state1 == "SV2":
                 if vm[1] <= (1 - sensi):
                     vm[1] += sensi
                     cliente.valvulas['valvula2'].set_value(vm[1])
+                else:
+                    vm[1] = 1
+                    cliente.valvulas['valvula2'].set_value(vm[1])
             elif self.state1 == "BV2":
                 if vm[1] >= sensi:
                     vm[1] -= sensi
+                    cliente.valvulas['valvula2'].set_value(vm[1])
+                else:
+                    vm[1] = 0
                     cliente.valvulas['valvula2'].set_value(vm[1])
 
         # VARIACIÓN DE RAZONES
