@@ -44,6 +44,7 @@ class BufferCircular():
                     file.write(string_to_write)
                     sum += 1
             print(f"Se escribieron {sum} datos")
+        self.datos = deque([0 for _ in range(self.RAM)])
 
 
 def obtener(cliente, interfaz: Interfaz, control: Control):
@@ -102,6 +103,8 @@ def eventos(interfaz: Interfaz, control: Control, buffer: BufferCircular):
                 control.state1 = "SF2"
             if event.key == pygame.K_j:             # TECLA j: bajar razon de flujo 2
                 control.state1 = "BF2"
+            if event.key == pygame.K_q:
+                control.state1 = "ESCALON"
         if event.type == pygame.MOUSEBUTTONDOWN:    # MOUSE BTN IZQ CLICK
             if event.button == LEFT:
                 control.state1 = "R"
